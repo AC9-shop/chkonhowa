@@ -2,740 +2,834 @@
 <html lang="ar" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-<title>Chkoun Howa؟ — Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شكون هو؟ — Chkoun Howa Online</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rakkas&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#0c3335; --bg-deep2:#092628; --card:#123f41; --card-line:#1d5658;
-    --cream:#f3ead4; --cream-dim:#cdc2a4; --gold:#d3ab3f; --terracotta:#c1512f;
-    --terracotta-dim:#8f3c24; --ok:#5f9e5a; --bad:#b6493a;
-    --king:#d3ab3f; --resistance:#b6493a; --scholar:#3f9490; --artist:#b8547f;
-    --sport:#5f9e5a; --writer:#6a6ab8; --modern:#d9812f; --radius:18px;
+    --teal-deep:#0F3B47; --teal-mid:#164F5E;
+    --terracotta:#C1440E; --terracotta-light:#E06C2C;
+    --sand:#F3E4C3; --sand-dark:#E4CE9E;
+    --gold:#C9A227; --maroon:#7B2D26;
+    --ink:#241A12; --cream-text:#FBF2DD;
   }
   *{box-sizing:border-box;}
-  html,body{height:100%;}
+  html,body{margin:0;padding:0;height:100%;}
   body{
-    margin:0; font-family:'Work Sans',sans-serif;
-    background:radial-gradient(circle at 15% 8%, rgba(211,171,63,0.10), transparent 40%),
-               radial-gradient(circle at 85% 92%, rgba(184,84,127,0.10), transparent 45%),
-               linear-gradient(160deg,var(--bg-deep),var(--bg-deep2));
-    color:var(--cream); min-height:100%; display:flex; align-items:center; justify-content:center; padding:18px;
+    font-family:'Cairo',sans-serif;
+    background:radial-gradient(circle at 15% 15%, rgba(201,162,39,0.10), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(193,68,14,0.12), transparent 40%), var(--teal-deep);
+    color:var(--cream-text); min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:20px; position:relative; overflow-x:hidden;
   }
-  .zellige-strip{height:10px;width:100%;
-    background-image: repeating-linear-gradient(45deg, var(--gold) 0 6px, transparent 6px 12px),
-                       repeating-linear-gradient(-45deg, var(--terracotta) 0 6px, transparent 6px 12px);
-    background-size: 12px 12px; opacity:.85;}
-  .phone{width:100%;max-width:420px;background:var(--card);border:1px solid var(--card-line);
-    border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.45);
-    min-height:640px;display:flex;flex-direction:column;}
-  .content{padding:26px 22px 22px;flex:1;display:flex;flex-direction:column;position:relative;}
-  h1.brand{font-family:'Cairo',sans-serif;font-weight:800;font-size:24px;margin:0 0 4px;}
-  h1.brand span{color:var(--gold);}
-  .tagline{color:var(--cream-dim);font-size:13px;margin:0 0 20px;}
-  h2.screen-title{font-family:'Cairo',sans-serif;font-weight:700;font-size:19px;margin:0 0 6px;}
-  p.hint{color:var(--cream-dim);font-size:13.5px;line-height:1.55;margin:0 0 16px;}
-  .grow{flex:1;}
-  .btn{display:block;width:100%;border:none;border-radius:14px;padding:14px 18px;
-    font-family:'Work Sans',sans-serif;font-weight:600;font-size:15px;cursor:pointer;text-align:center;
-    transition:transform .12s ease, filter .12s ease;}
-  .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--terracotta);color:var(--cream);}
-  .btn-secondary{background:transparent;color:var(--cream);border:1.5px solid var(--card-line);}
-  .btn-gold{background:var(--gold);color:#20260c;}
-  .btn[disabled]{opacity:.4;cursor:not-allowed;}
-  .stack{display:flex;flex-direction:column;gap:10px;}
-  input.text-input{
-    width:100%;background:var(--bg-deep2);border:1px solid var(--card-line);border-radius:12px;
-    color:var(--cream);font-size:15px;padding:13px 14px;font-family:'Work Sans',sans-serif;outline:none;
+  body::before{
+    content:""; position:fixed; inset:0; opacity:0.07; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23C9A227' stroke-width='1.2'%3E%3Cpath d='M42 2 L62 22 L42 42 L22 22 Z'/%3E%3Cpath d='M42 42 L62 62 L42 82 L22 62 Z'/%3E%3Cpath d='M2 22 L22 2 L42 22 L22 42 Z'/%3E%3Cpath d='M42 22 L62 2 L82 22 L62 42 Z'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
   }
-  input.text-input:focus{border-color:var(--gold);}
-  .code-display{
-    font-family:'Cairo',sans-serif;font-weight:800;font-size:38px;letter-spacing:6px;color:var(--gold);
-    text-align:center;background:var(--bg-deep2);border:1.5px dashed var(--gold);border-radius:14px;padding:16px;margin-bottom:16px;
+  .app{
+    width:100%; max-width:640px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08));
+    border:1px solid rgba(201,162,39,0.35); border-radius:18px; padding:32px 28px;
+    position:relative; z-index:1; box-shadow:0 30px 60px rgba(0,0,0,0.4);
   }
-  .chip-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
-  .chip{padding:10px 16px;border-radius:24px;border:1.5px solid var(--card-line);background:var(--bg-deep2);
-    color:var(--cream);font-size:13.5px;cursor:pointer;}
-  .chip.on{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
-  .player-row{display:flex;justify-content:space-between;align-items:center;background:var(--bg-deep2);
-    border-radius:10px;padding:11px 14px;font-size:14px;margin-bottom:8px;}
-  .player-row.me{border:1.5px solid var(--gold);}
-  .player-row .lives{color:var(--gold);font-weight:700;}
-  .player-row.eliminated{opacity:.4;text-decoration:line-through;}
-  .player-row .desc-tag{color:var(--terracotta);font-size:11px;margin-left:6px;}
-  .search-input{margin-bottom:10px;}
-  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;overflow-y:auto;max-height:290px;padding:2px;margin-bottom:12px;}
-  .pcard{border-radius:12px;padding:11px 9px;background:var(--bg-deep2);border:1.5px solid var(--card-line);
-    cursor:pointer;min-height:58px;display:flex;flex-direction:column;justify-content:space-between;
-    transition:border-color .12s ease, transform .12s ease;}
-  .pcard:hover{border-color:var(--gold);}
-  .pcard.selected{border-color:var(--gold);background:#1c4d47;transform:scale(1.02);}
-  .pcard.used{opacity:.35;}
-  .tag-row{display:flex;gap:4px;flex-wrap:wrap;}
-  .cat-tag,.diff-tag{font-size:9.5px;padding:2px 7px;border-radius:20px;color:#1a1a1a;font-weight:700;}
-  .cat-king{background:var(--king);} .cat-resistance{background:var(--resistance);color:#fff;}
-  .cat-scholar{background:var(--scholar);color:#fff;} .cat-artist{background:var(--artist);color:#fff;}
-  .cat-sport{background:var(--sport);color:#fff;} .cat-writer{background:var(--writer);color:#fff;}
-  .cat-modern{background:var(--modern);}
-  .diff-easy{background:#7fbf7a;} .diff-medium{background:#e0b84a;} .diff-hard{background:#d97a5a;color:#fff;}
-  .pcard .cname{font-family:'Cairo',sans-serif;font-weight:700;font-size:13.5px;margin-top:7px;color:var(--cream);}
-  .pass-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;gap:8px;}
-  .pass-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--terracotta));
-    display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-weight:800;font-size:24px;color:#1c1400;margin-bottom:8px;}
-  .pass-name{font-family:'Cairo',sans-serif;font-weight:800;font-size:20px;}
-  .pass-role{color:var(--gold);font-size:13.5px;margin-top:2px;margin-bottom:16px;}
-  .timer{font-family:'Cairo',sans-serif;font-size:40px;font-weight:800;color:var(--gold);text-align:center;margin:8px 0;}
-  .target-card{background:linear-gradient(135deg,#1c4d47,#123f41);border:2px solid var(--gold);border-radius:14px;
-    padding:15px;text-align:center;margin-bottom:16px;}
-  .target-card .lbl{font-size:11.5px;color:var(--gold);margin-bottom:4px;}
-  .target-card .name{font-family:'Cairo',sans-serif;font-weight:800;font-size:18px;}
-  .reveal-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg-deep2);
-    border:1.5px solid var(--card-line);border-radius:12px;padding:11px 13px;margin-bottom:9px;}
-  .reveal-row .who{font-size:12px;color:var(--cream-dim);}
-  .reveal-row .what{font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;}
-  .badge{font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:20px;white-space:nowrap;margin-left:8px;}
-  .badge.match{background:var(--ok);color:#fff;} .badge.nomatch{background:var(--bad);color:#fff;} .badge.late{background:#8a7a3a;color:#fff;}
-  .modal-bg{position:fixed;inset:0;background:rgba(5,15,15,.8);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;}
-  .modal{background:var(--card);border:1.5px solid var(--gold);border-radius:16px;padding:22px;max-width:340px;text-align:center;}
-  .modal h3{font-family:'Cairo',sans-serif;margin:0 0 10px;font-size:18px;color:var(--terracotta);}
-  .modal p{font-size:14px;line-height:1.6;color:var(--cream);margin:0 0 18px;}
-  .winner-emoji{font-size:52px;text-align:center;margin-bottom:8px;}
-  .rules-btn{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.06);border:1px solid var(--card-line);
-    color:var(--cream-dim);font-size:11.5px;border-radius:20px;padding:6px 11px;cursor:pointer;z-index:5;}
-  .config-warning{background:#4a2a1a;border:1.5px solid var(--terracotta);border-radius:12px;padding:14px;font-size:12.5px;
-    line-height:1.6;margin-bottom:16px;color:var(--cream);}
-  .config-warning code{background:rgba(0,0,0,.3);padding:1px 5px;border-radius:4px;}
-  .error-box{background:#4a1a1a;border:1.5px solid var(--bad);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:12px;}
-  ::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-thumb{background:var(--card-line);border-radius:5px;}
+  h1.title{font-family:'Rakkas',serif; font-size:2.4rem; color:var(--gold); text-align:center; margin:0 0 2px;}
+  .subtitle{text-align:center; color:rgba(251,242,221,0.65); font-size:0.95rem; margin-bottom:24px; font-weight:600;}
+  .screen{display:none;}
+  .screen.active{display:block; animation:fadein 0.35s ease;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  label{display:block; font-size:0.85rem; color:var(--gold); font-weight:700; margin:16px 0 6px;}
+  input[type=text]{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(201,162,39,0.4);
+    background:rgba(0,0,0,0.25); color:var(--cream-text); font-family:'Cairo',sans-serif; font-size:1rem; text-align:center; letter-spacing:2px; text-transform:uppercase;}
+  input::placeholder{color:rgba(251,242,221,0.35); letter-spacing:normal; text-transform:none;}
+  textarea{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(201,162,39,0.4);
+    background:rgba(0,0,0,0.25); color:var(--cream-text); font-family:'Cairo',sans-serif; font-size:0.95rem; resize:vertical; min-height:60px;}
+  .btn{display:inline-block; width:100%; text-align:center; padding:14px 18px; border-radius:12px; border:none;
+    font-family:'Cairo',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; margin-top:14px;
+    transition:transform 0.12s ease, filter 0.12s ease;}
+  .btn:active{transform:scale(0.98);}
+  .btn:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn-primary{background:linear-gradient(135deg, var(--terracotta-light), var(--terracotta)); color:#fff;}
+  .btn-gold{background:linear-gradient(135deg, #E0C158, var(--gold)); color:#241A12;}
+  .btn-ghost{background:transparent; border:1.5px solid rgba(201,162,39,0.5); color:var(--cream-text);}
+  .btn-mic{background:linear-gradient(135deg,#9A3D34,var(--maroon)); color:#fff;}
+  .btn-mic.recording{background:linear-gradient(135deg,#E0392A,#C1440E); animation:pulse 1.2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(193,68,14,0.5);} 70%{box-shadow:0 0 0 12px rgba(193,68,14,0);} 100%{box-shadow:0 0 0 0 rgba(193,68,14,0);}}
+  .btn-share{background:#25D366; color:#fff;}
+  .btn-google{background:#fff; color:#3c4043; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .btn-row{display:flex; gap:8px;}
+  .btn-row .btn{margin-top:10px;}
+  .center-msg{text-align:center; margin:18px 0;}
+  .center-msg .big{font-family:'Rakkas',serif; font-size:1.6rem; color:var(--gold); margin-bottom:6px;}
+  .center-msg .small{color:rgba(251,242,221,0.75); font-size:0.9rem;}
+  .room-code-display{
+    text-align:center; font-family:'Rakkas',serif; font-size:2.6rem; letter-spacing:8px;
+    color:var(--gold); background:rgba(0,0,0,0.25); border:2px dashed var(--gold);
+    border-radius:14px; padding:18px; margin:16px 0; cursor:pointer;
+  }
+  .player-chip-list{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; justify-content:center;}
+  .player-chip{background:rgba(0,0,0,0.25); border:1px solid rgba(201,162,39,0.3); border-radius:20px; padding:8px 16px; font-size:0.85rem; font-weight:700;}
+  .card-face{background:linear-gradient(160deg, var(--sand), var(--sand-dark)); color:var(--ink); border-radius:14px;
+    padding:26px 20px; text-align:center; border:3px solid var(--gold); box-shadow:0 12px 24px rgba(0,0,0,0.3);}
+  .card-face .era-tag{display:inline-block; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px;
+    margin-bottom:10px; background:var(--maroon); color:#fff;}
+  .card-face .era-tag.jdida{background:var(--teal-mid);}
+  .card-face .char-name{font-family:'Rakkas',serif; font-size:1.6rem;}
+  .card-back{background:repeating-linear-gradient(45deg, var(--teal-mid), var(--teal-mid) 10px, var(--teal-deep) 10px, var(--teal-deep) 20px);
+    border-radius:14px; border:3px solid var(--gold); display:flex; align-items:center; justify-content:center;
+    padding:40px 20px; color:var(--gold); font-family:'Rakkas',serif; font-size:1.3rem;}
+  .hand-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:10px; margin-top:14px;
+    max-height:320px; overflow-y:auto; padding:4px;}
+  .mini-card{background:linear-gradient(160deg, var(--sand), var(--sand-dark)); color:var(--ink); border-radius:10px;
+    border:2px solid var(--gold); padding:14px 8px; text-align:center; cursor:pointer; font-weight:700; font-size:0.85rem;
+    transition:transform 0.12s ease, box-shadow 0.12s ease; line-height:1.3;}
+  .mini-card:hover{transform:translateY(-4px); box-shadow:0 8px 16px rgba(0,0,0,0.3);}
+  .mini-card.selected{outline:3px solid var(--terracotta); background:linear-gradient(160deg,#fff,var(--sand));}
+  .privacy-note{background:rgba(193,68,14,0.15); border:1px solid rgba(193,68,14,0.4); border-radius:10px;
+    padding:12px 14px; font-size:0.85rem; margin-top:14px; text-align:center;}
+  .scoreboard{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; justify-content:center;}
+  .score-chip{background:rgba(0,0,0,0.25); border:1px solid rgba(201,162,39,0.3); border-radius:20px; padding:6px 14px; font-size:0.8rem; font-weight:700;}
+  .score-chip.out{opacity:0.35; text-decoration:line-through;}
+  .score-chip.turn{border-color:var(--terracotta); background:rgba(193,68,14,0.2);}
+  .reveal-row{display:flex; gap:14px; margin-top:16px;}
+  .reveal-col{flex:1; text-align:center;}
+  .reveal-col .who{font-size:0.8rem; color:var(--gold); font-weight:700; margin-bottom:8px;}
+  .result-banner{text-align:center; font-family:'Rakkas',serif; font-size:1.5rem; margin:18px 0 6px; padding:14px; border-radius:12px;}
+  .result-banner.match{background:rgba(46,125,50,0.25); color:#8FE29A; border:1px solid rgba(46,125,50,0.5);}
+  .result-banner.nomatch{background:rgba(193,68,14,0.2); color:#F0B27A; border:1px solid rgba(193,68,14,0.4);}
+  .guess-choices{display:flex; flex-direction:column; gap:8px; margin-top:12px;}
+  .guess-choices .btn{margin-top:0;}
+  .winner-box{text-align:center; padding:20px 0;}
+  .winner-box .trophy{font-size:3rem;}
+  .winner-box .name{font-family:'Rakkas',serif; font-size:2rem; color:var(--gold); margin:8px 0;}
+  .question-box{background:linear-gradient(160deg, var(--maroon), #5a201b); border-radius:14px; padding:24px 20px;
+    text-align:center; margin-top:16px; border:2px solid var(--gold);}
+  .question-box .q{font-family:'Rakkas',serif; font-size:1.3rem; line-height:1.5;}
+  .waiting-box{text-align:center; padding:30px 0;}
+  .spinner{width:36px; height:36px; border:4px solid rgba(201,162,39,0.3); border-top-color:var(--gold);
+    border-radius:50%; margin:0 auto 16px; animation:spin 0.9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .user-badge{display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:10px;}
+  .user-badge img{width:32px; height:32px; border-radius:50%; border:2px solid var(--gold);}
+  .link-btn{background:none; border:none; color:var(--gold); text-decoration:underline; cursor:pointer;
+    font-family:'Cairo',sans-serif; font-size:0.85rem; display:block; margin:14px auto 0; text-align:center; width:100%;}
+  .error-msg{background:rgba(193,68,14,0.2); border:1px solid rgba(193,68,14,0.5); border-radius:10px; padding:10px 14px;
+    font-size:0.85rem; text-align:center; margin-top:12px; display:none;}
+  .live-desc-box{
+    background:rgba(0,0,0,0.3); border:1px dashed rgba(201,162,39,0.5); border-radius:12px;
+    padding:14px; margin-top:14px; min-height:50px; font-size:0.95rem; text-align:center; color:var(--cream-text);
+  }
+  .live-desc-box.empty{color:rgba(251,242,221,0.35); font-style:italic;}
+  .mic-row{display:flex; gap:10px; align-items:center; margin-top:10px;}
+  .mic-row .btn{margin-top:0;}
+  .self-guess-list{display:flex; flex-direction:column; gap:8px; margin-top:16px;}
+  .self-guess-list .btn{margin-top:0;}
+  .share-box{margin-top:18px; padding-top:16px; border-top:1px dashed rgba(201,162,39,0.3);}
+  @media (max-width:480px){ .app{padding:22px 16px;} h1.title{font-size:1.9rem;} }
 </style>
 </head>
 <body>
-<div class="phone">
-  <div class="zellige-strip"></div>
-  <div class="content" id="app"></div>
+<div class="app">
+  <h1 class="title">شكون هو؟</h1>
+  <div class="subtitle">Chkoun Howa Online — L3ab m3a S7abek 3n Bo3d</div>
+
+  <!-- AUTH -->
+  <div class="screen active" id="screen-auth">
+    <div class="center-msg">
+      <div class="big">Merhba!</div>
+      <div class="small">Dkhol b Google bach tبدا wla tdkhol l ghorfa</div>
+    </div>
+    <button class="btn btn-google" onclick="signIn()">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.66 9c0-.59.1-1.17.29-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97L3.95 7.3C4.66 5.17 6.65 3.58 9 3.58z"/></svg>
+      Dkhol b Google
+    </button>
+    <div class="error-msg" id="auth-error"></div>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen" id="screen-home">
+    <div class="user-badge">
+      <img id="user-avatar" src="" alt="">
+      <span id="user-name-label"></span>
+    </div>
+    <button class="btn btn-primary" onclick="createRoom()">🎉 Dir Ghorfa Jdida</button>
+    <label>Wla dkhol b Code dyal Ghorfa</label>
+    <input type="text" id="join-code-input" maxlength="4" placeholder="XXXX">
+    <button class="btn btn-gold" onclick="joinRoom()">🚪 Dkhol l Ghorfa</button>
+    <div class="error-msg" id="home-error"></div>
+  </div>
+
+  <!-- LOBBY -->
+  <div class="screen" id="screen-lobby">
+    <div class="center-msg"><div class="small">Sift had code wla rabt l s7abek bach ydkhlo (2-8 players)</div></div>
+    <div class="room-code-display" id="room-code-display" onclick="copyRoomCode()"></div>
+    <div class="player-chip-list" id="lobby-players"></div>
+    <button class="btn btn-primary" id="start-game-btn" style="display:none;" onclick="startOnlineGame()">🎴 Bda L3ab</button>
+    <div class="center-msg small" id="lobby-wait-msg">Katsna l-host bach ybda l3ab...</div>
+
+    <div class="share-box">
+      <label>Sift Rabt dyal Ghorfa</label>
+      <div class="btn-row">
+        <button class="btn btn-share" onclick="shareWhatsapp()">🟢 WhatsApp</button>
+        <button class="btn btn-ghost" onclick="copyRoomLink()">📋 Copy Rabt</button>
+      </div>
+      <button class="btn btn-gold" onclick="nativeShare()">📤 Sift (Instagram/Messages...)</button>
+    </div>
+  </div>
+
+  <!-- TURN INTRO -->
+  <div class="screen" id="screen-turn">
+    <div class="center-msg">
+      <div class="big" id="turn-player-name"></div>
+      <div class="small" id="turn-sub-msg"></div>
+    </div>
+    <button class="btn btn-primary" id="open-hand-btn" style="display:none;" onclick="openHandForDescribe()">👁 Chouf Cartes Dyali</button>
+    <div class="scoreboard" id="scoreboard-turn"></div>
+  </div>
+
+  <!-- DESCRIBER HAND -->
+  <div class="screen" id="screen-describe-hand">
+    <div class="privacy-note">🔒 Khtar 1 card bach twsef biha.</div>
+    <div class="hand-grid" id="describe-hand-grid"></div>
+    <button class="btn btn-primary" id="confirm-describe-btn" style="display:none;" onclick="confirmDescribeCard()">✅ Hadi Hiya, Khebiha!</button>
+  </div>
+
+  <!-- DESCRIBING PUBLIC -->
+  <div class="screen" id="screen-describing">
+    <div class="card-back">🎭 Card Mkhebya</div>
+    <div class="center-msg">
+      <div class="big" id="describing-name"></div>
+    </div>
+
+    <div id="describer-mic-controls" style="display:none;">
+      <div class="mic-row">
+        <button class="btn btn-mic" id="mic-btn" onclick="toggleMic()">🎤 Bda Twasef</button>
+      </div>
+      <label>Wla kteb wasf dyalek hna (fallback)</label>
+      <textarea id="desc-textarea" placeholder="Kteb wasf dyal chakhsiya..." oninput="onDescTextInput()"></textarea>
+      <button class="btn btn-ghost" id="skip-btn" onclick="noOneGuessed()">🤷 Hta Wa7d Ma 3raf</button>
+    </div>
+
+    <div class="live-desc-box empty" id="live-desc-box">Wasf ghadi yban hna live...</div>
+
+    <div id="guesser-self-select" style="display:none;">
+      <div class="self-guess-list" id="self-guess-list"></div>
+    </div>
+
+    <div id="waiter-msg" class="center-msg small" style="display:none;">Katsna...</div>
+  </div>
+
+  <!-- GUESSER HAND -->
+  <div class="screen" id="screen-guesser-hand">
+    <div class="privacy-note">🔒 Khtar l-card li t5ammen biha.</div>
+    <div class="hand-grid" id="guesser-hand-grid"></div>
+    <button class="btn btn-primary" id="confirm-guess-btn" style="display:none;" onclick="confirmGuessCard()">✅ Hadi L-Guess Dyali</button>
+    <button class="btn btn-ghost" onclick="cancelMyGuess()">Rjjo3 (Ma bghitch nkhamen)</button>
+  </div>
+
+  <!-- REVEAL -->
+  <div class="screen" id="screen-reveal">
+    <div class="result-banner" id="result-banner"></div>
+    <div class="reveal-row">
+      <div class="reveal-col"><div class="who" id="reveal-describer-label"></div><div class="card-face" id="reveal-describe-card"></div></div>
+      <div class="reveal-col"><div class="who" id="reveal-guesser-label"></div><div class="card-face" id="reveal-guess-card"></div></div>
+    </div>
+    <button class="btn btn-primary" id="reveal-continue-btn" onclick="afterReveal()">Kammel ➜</button>
+    <div id="reveal-waiter" class="center-msg small" style="display:none;">Katsna...</div>
+  </div>
+
+  <!-- ELIMINATION -->
+  <div class="screen" id="screen-question">
+    <div class="center-msg">
+      <div class="big" id="elim-player-name"></div>
+      <div class="small">Salaw lih les cartes! Soual mo7rij:</div>
+    </div>
+    <div class="question-box"><div class="q" id="mohrij-question"></div></div>
+    <button class="btn btn-primary" id="question-continue-btn" onclick="afterQuestion()">Fhemt, Kammel ➜</button>
+    <div id="question-waiter" class="center-msg small" style="display:none;">Katsna...</div>
+  </div>
+
+  <!-- WINNER -->
+  <div class="screen" id="screen-winner">
+    <div class="winner-box">
+      <div class="trophy">🏆</div>
+      <div class="small">L-Fa2iz Howa</div>
+      <div class="name" id="winner-name"></div>
+    </div>
+    <button class="btn btn-primary" onclick="backToHome()">🔄 Ghorfa Jdida</button>
+  </div>
+
+  <!-- WAITING -->
+  <div class="screen" id="screen-waiting">
+    <div class="waiting-box"><div class="spinner"></div><div id="waiting-text">Katsna...</div></div>
+  </div>
 </div>
 
 <script type="module">
-/* ============================================================
-   FIREBASE CONFIG — KHASSEK TBDEL HADCHI B CONFIG DYALEK!
-   1) Sir l https://console.firebase.google.com → Sawb project jdid (gratuit)
-   2) Zid app dyal "Web" (</> icon) → copy config object
-   3) F "Build > Firestore Database" → "Create database" → bda f "test mode"
-      (test mode = kola wa7d 3ando l-link 3ando dawro y9ra/ykteb — khaslkin l party
-      game bin l-shab, machi l production b des données 7ssasa)
-   4) Lsa9 config taht:
-   ============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyA0MzAmsQygExX7uU1NxU8EFQzTKQS_j70",
   authDomain: "chkoun-howa.firebaseapp.com",
   projectId: "chkoun-howa",
   storageBucket: "chkoun-howa.firebasestorage.app",
   messagingSenderId: "146729165464",
-  appId: "1:146729165464:web:f86b02de4752a27e0de6ed"
+  appId: "1:146729165464:web:f86b02de4752a27e0de6ed",
+  measurementId: "G-JEL727NFLX"
 };
-const CONFIG_IS_PLACEHOLDER = firebaseConfig.apiKey === "YOUR_API_KEY";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-let db=null, doc=null, setDoc=null, getDoc=null, onSnapshot=null, runTransaction=null;
-if(!CONFIG_IS_PLACEHOLDER){
-  const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-  const fs = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
-  const app = initializeApp(firebaseConfig);
-  db = fs.getFirestore(app);
-  doc = fs.doc; setDoc = fs.setDoc; getDoc = fs.getDoc; onSnapshot = fs.onSnapshot; runTransaction = fs.runTransaction;
-}
-
-const CARDS = [
-  {id:1,name:"Youssef Ben Tachfine",cat:"king",diff:"easy"},
-  {id:2,name:"Moulay Idriss Al Akbar",cat:"king",diff:"hard"},
-  {id:3,name:"Ahmed Al Mansour Dahbi",cat:"king",diff:"medium"},
-  {id:4,name:"Moulay Ismail",cat:"king",diff:"easy"},
-  {id:5,name:"Mohammed V",cat:"king",diff:"easy"},
-  {id:6,name:"Hassan II",cat:"king",diff:"easy"},
-  {id:7,name:"Mohammed VI",cat:"king",diff:"easy"},
-  {id:8,name:"Moulay Slimane",cat:"king",diff:"medium"},
-  {id:9,name:"Abdelkrim El Khattabi",cat:"resistance",diff:"medium"},
-  {id:10,name:"Allal El Fassi",cat:"resistance",diff:"medium"},
-  {id:11,name:"Mehdi Ben Barka",cat:"resistance",diff:"medium"},
-  {id:12,name:"Mohamed Zerktouni",cat:"resistance",diff:"hard"},
-  {id:13,name:"Malika El Fassi",cat:"resistance",diff:"hard"},
-  {id:14,name:"Abderrahim Bouabid",cat:"resistance",diff:"hard"},
-  {id:15,name:"Ahmed Balafrej",cat:"resistance",diff:"hard"},
-  {id:16,name:"Fatima Al-Fihriya",cat:"scholar",diff:"hard"},
-  {id:17,name:"Al Idrissi",cat:"scholar",diff:"hard"},
-  {id:18,name:"Ibn Battuta",cat:"scholar",diff:"easy"},
-  {id:19,name:"Al-Yousi",cat:"scholar",diff:"hard"},
-  {id:20,name:"Mohammed Al Mokhtar Soussi",cat:"scholar",diff:"hard"},
-  {id:21,name:"Naima Samih",cat:"artist",diff:"easy"},
-  {id:22,name:"Abdelhadi Belkhayat",cat:"artist",diff:"medium"},
-  {id:23,name:"Nass El Ghiwane",cat:"artist",diff:"easy"},
-  {id:24,name:"Samira Said",cat:"artist",diff:"easy"},
-  {id:25,name:"Latifa Raafat",cat:"artist",diff:"medium"},
-  {id:26,name:"Mohamed Fouiteh",cat:"artist",diff:"hard"},
-  {id:27,name:"Hoba Hoba Spirit",cat:"artist",diff:"hard"},
-  {id:28,name:"Mahmoud Guinia",cat:"artist",diff:"hard"},
-  {id:29,name:"Rachid El Ouali",cat:"artist",diff:"hard"},
-  {id:30,name:"Hicham El Guerrouj",cat:"sport",diff:"easy"},
-  {id:31,name:"Nawal El Moutawakel",cat:"sport",diff:"easy"},
-  {id:32,name:"Saïd Aouita",cat:"sport",diff:"medium"},
-  {id:33,name:"Achraf Hakimi",cat:"sport",diff:"easy"},
-  {id:34,name:"Khalid Skah",cat:"sport",diff:"hard"},
-  {id:35,name:"Nezha Bidouane",cat:"sport",diff:"hard"},
-  {id:36,name:"Youssef En-Nesyri",cat:"sport",diff:"medium"},
-  {id:37,name:"Tahar Ben Jelloun",cat:"writer",diff:"easy"},
-  {id:38,name:"Fatima Mernissi",cat:"writer",diff:"medium"},
-  {id:39,name:"Driss Chraïbi",cat:"writer",diff:"medium"},
-  {id:40,name:"Mohammed Choukri",cat:"writer",diff:"medium"},
-  {id:41,name:"Abdellatif Laabi",cat:"writer",diff:"hard"},
-  {id:42,name:"RedOne",cat:"modern",diff:"easy"},
-  {id:43,name:"French Montana",cat:"modern",diff:"easy"},
-  {id:44,name:"Dounia Batma",cat:"modern",diff:"medium"},
-  {id:45,name:"Fnaire",cat:"modern",diff:"easy"},
-  {id:46,name:"Ibtissam Tiskat",cat:"modern",diff:"medium"},
-  {id:47,name:"Salaheddine",cat:"modern",diff:"medium"},
-  {id:48,name:"Dizzy DROS",cat:"modern",diff:"medium"},
+const CHARACTERS = [
+  {id:1, name:"Youssef Ibn Tachfin", era:"9dima"},
+  {id:2, name:"Idriss Al Awal", era:"9dima"},
+  {id:3, name:"Moulay Ismail", era:"9dima"},
+  {id:4, name:"Ahmed Al Mansour Addahbi", era:"9dima"},
+  {id:5, name:"Abd El Krim Al Khattabi", era:"9dima"},
+  {id:6, name:"Mohammed Al Khamis", era:"9dima"},
+  {id:7, name:"Al Hassan Ath-Thani", era:"9dima"},
+  {id:8, name:"Fatima Al Fihriya", era:"9dima"},
+  {id:9, name:"Ibn Battuta", era:"9dima"},
+  {id:10, name:"Hassan Al Wazzan", era:"9dima"},
+  {id:11, name:"Malika Al Fassi", era:"9dima"},
+  {id:12, name:"Allal Al Fassi", era:"9dima"},
+  {id:13, name:"Zaynab Nfissa", era:"9dima"},
+  {id:14, name:"Mohammed Choukri", era:"9dima"},
+  {id:15, name:"Fatema Mernissi", era:"9dima"},
+  {id:16, name:"Tahar Ben Jelloun", era:"jdida"},
+  {id:17, name:"Leila Slimani", era:"jdida"},
+  {id:18, name:"Nawal El Moutawakel", era:"jdida"},
+  {id:19, name:"Hicham El Guerrouj", era:"jdida"},
+  {id:20, name:"Achraf Hakimi", era:"jdida"},
+  {id:21, name:"Youssef En-Nesyri", era:"jdida"},
+  {id:22, name:"Walid Regragui", era:"jdida"},
+  {id:23, name:"Oum", era:"jdida"},
+  {id:24, name:"Hindi Zahra", era:"jdida"},
+  {id:25, name:"RedOne", era:"jdida"},
+  {id:26, name:"Jamel Debbouze", era:"jdida"},
+  {id:27, name:"Nabil Ayouch", era:"jdida"},
+  {id:28, name:"Fnaire", era:"jdida"},
+  {id:29, name:"Nass El Ghiwane", era:"jdida"},
+  {id:30, name:"Asmaa Lamnawar", era:"jdida"},
 ];
-const CAT_LABEL = {king:"Melouk",resistance:"Moqawama",scholar:"3olama",artist:"Fen",sport:"Riyada",writer:"Adab",modern:"3asri"};
-const DIFF_LABEL = {easy:"Sahla",medium:"Motawasta",hard:"Sa3ba"};
-const EMBARRASSING_QUESTIONS = [
-  "Chkoun l chakhsiya chahira li kane 3jbek bzaf w nta sghir?",
-  "Chno akhtar 7aja mo7rija dertiha f 7afla wla soirée?",
-  "Ila kanti ghadi tbdel esmek b esm chi chakhsiya f had l3ab, chkoun ghatkhtar w 3lach?",
-  "Chno akhtar sur3a katmchi biha katghani wa7dek f dar?",
-  "Chkoun f l3a2ila dyalek li kaychbhek bzaf f style?",
-  "Chno akhtar film/mosalsal Maghribi chftih ktar mn merra?",
-  "Ila jatek forsa tddi selfie m3a chi chakhsiya f had l3ab, chkoun?",
-  "Chno akhtar 3ada Maghribia katdir biha ghir nta w bnadem katdhak 3lik fiha?",
-  "Chno akhtar makla katbghiha bzaf w katkhbi3ha 3la nas?",
-  "Ila kant lik ghi da9i9a wa7da bach tban f TV, chno ghatdir?",
+const MOHRIJ_QUESTIONS = [
+  "Chkon akher chi wa7d 9elt lih 'nb9awdik' bla matdiroha?",
+  "Ila kanti chakhsiya maghribiya, chkon ghatkoun w 3lach?",
+  "Chno akther 7aja katsiwlha b clavier li khass ma tban l 7ta wa7d?",
+  "9olina wa7d embarrassing moment sra lik f l medrassa.",
+  "Ila khayrouk bin tetla3 l Sahara wla t8ate6 f l bahr, chno ghatkhtar w 3lach?",
+  "Chkon f had ghorfa momkin ykoun 'agent secret' w 7ta wa7d ma 3aref?",
+  "9olina akher chi haja bghitiha w chritiha bla ma t7taj liha bzaf.",
+  "Wsef nafsek b 3 klimat ki lo kant chi personnage f musalsal.",
+  "Chno akther chi 7aja katkhaf mnha w hiya bsita?",
+  "Ila 3endek dakchi bach tbeddel chi 7aja f Maghreb, chno ghatbeddel awlan?",
 ];
 
-function cardsPerPlayer(n){ if(n===2) return 10; if(n<=4) return 8; if(n<=6) return 7; return 6; }
-function findCard(id){ return CARDS.find(c=>c.id===id); }
-function genCode(){ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<5;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
-function genId(){ return (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)); }
-function initials(name){ return name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+let currentUser = null;
+let currentRoomCode = null;
+let currentRoom = null;
+let unsubRoom = null;
+let describeSelection = null;
+let guessSelection = null;
+let pendingJoinCode = null;
+let didAutoJoin = false;
 
-let S = {
-  screen: 'home', myName:'', myId: genId(), code:null, room:null, unsub:null,
-  error:null, difficultyChoice:'all', joinCodeInput:'', searchText:'',
-  selectedCharId:null, describingTimerSeconds:30, describingTimerHandle:null,
-  rulesOpen:false, lastEliminatedShown:false,
-};
+// mic / speech recognition
+let recognition = null;
+let isRecording = false;
+let descTextDebounce = null;
 
-function poolForDifficulty(diff){
-  if(diff==='all') return CARDS;
-  return CARDS.filter(c=>c.diff===diff);
+const params = new URLSearchParams(window.location.search);
+if(params.get('room')){ pendingJoinCode = params.get('room').toUpperCase(); }
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function showError(elId, msg){
+  const el = document.getElementById(elId);
+  el.textContent = msg; el.style.display='block';
+  setTimeout(()=>{el.style.display='none';}, 4000);
+}
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  return arr;
+}
+function genRoomCode(){
+  const letters='ABCDEFGHJKLMNPQRSTUVWXYZ';
+  let c=''; for(let i=0;i<4;i++) c+=letters[Math.floor(Math.random()*letters.length)];
+  return c;
+}
+function roomShareUrl(){
+  return location.origin + location.pathname + '?room=' + currentRoomCode;
 }
 
-// ---------------- FIREBASE ACTIONS ----------------
-async function createRoom(){
-  if(CONFIG_IS_PLACEHOLDER){ S.error="Khassek dir Firebase config awalan (chouf commentaire f top dyal l-code)."; render(); return; }
-  if(!S.myName.trim()){ S.error="Kteb smiytek."; render(); return; }
-  const code = genCode();
-  const roomRef = doc(db,'rooms',code);
-  const initialRoom = {
-    hostId: S.myId, difficulty: S.difficultyChoice, phase:'lobby',
-    players:[{id:S.myId,name:S.myName.trim(),lives:0,eliminated:false}],
-    describerIndex:0, round:0, usedCharacterIds:[], targetCharacterId:null, guesses:[],
-    winnerId:null, createdAt: Date.now(),
+// ---------- AUTH ----------
+window.signIn = function(){
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider).catch(err=>{
+    showError('auth-error', 'Ma9darch ndkhol: ' + err.message);
+  });
+};
+onAuthStateChanged(auth, async (user)=>{
+  if(user){
+    currentUser = user;
+    document.getElementById('user-avatar').src = user.photoURL || '';
+    document.getElementById('user-name-label').textContent = user.displayName || 'Player';
+    if(pendingJoinCode && !didAutoJoin){
+      didAutoJoin = true;
+      document.getElementById('join-code-input').value = pendingJoinCode;
+      showScreen('screen-waiting');
+      document.getElementById('waiting-text').textContent = 'Katdkhol l ghorfa...';
+      await joinRoom();
+    } else {
+      showScreen('screen-home');
+    }
+  } else {
+    currentUser = null;
+    showScreen('screen-auth');
+  }
+});
+
+// ---------- DECK SIZING (equal hands for any player count 2-8) ----------
+function computeNumChars(numPlayers){
+  for(let n=30; n>=1; n--){
+    if((2*n) % numPlayers === 0) return n;
+  }
+  return numPlayers;
+}
+
+// ---------- ROOM CREATE / JOIN ----------
+window.createRoom = async function(){
+  const code = genRoomCode();
+  const roomRef = doc(db, 'rooms', code);
+  const initialData = {
+    hostUid: currentUser.uid,
+    status: 'lobby',
+    players: [{uid: currentUser.uid, name: currentUser.displayName, hand: [], out:false}],
+    describerUid: null, describeCard: null,
+    guesserUid: null, guessCard: null,
+    liveDescription: '',
+    phase: 'lobby',
+    pendingElim: [], elimUid: null, currentQuestion: '',
+    winnerUid: null,
+    updatedAt: Date.now(),
   };
-  await setDoc(roomRef, initialRoom);
-  S.code = code;
-  subscribeRoom(code);
-  S.screen='lobby'; S.error=null; render();
+  await setDoc(roomRef, initialData);
+  enterRoom(code);
+};
+
+window.joinRoom = async function(){
+  const codeInput = document.getElementById('join-code-input');
+  const code = codeInput.value.trim().toUpperCase();
+  if(code.length!==4){ showError('home-error','Dkhol code dyal 4 horouf.'); showScreen('screen-home'); return; }
+  const roomRef = doc(db, 'rooms', code);
+  const snap = await getDoc(roomRef);
+  if(!snap.exists()){ showError('home-error','Had l-ghorfa mal9itach.'); showScreen('screen-home'); return; }
+  const data = snap.data();
+  if(data.status !== 'lobby'){ showError('home-error','L3ab bda deja f had ghorfa.'); showScreen('screen-home'); return; }
+  if(data.players.length >= 8){ showError('home-error','L-ghorfa 3amra.'); showScreen('screen-home'); return; }
+  if(!data.players.find(p=>p.uid===currentUser.uid)){
+    data.players.push({uid: currentUser.uid, name: currentUser.displayName, hand:[], out:false});
+    await updateDoc(roomRef, {players: data.players});
+  }
+  enterRoom(code);
+};
+
+function enterRoom(code){
+  currentRoomCode = code;
+  if(unsubRoom) unsubRoom();
+  const roomRef = doc(db, 'rooms', code);
+  unsubRoom = onSnapshot(roomRef, (snap)=>{
+    if(!snap.exists()) return;
+    currentRoom = snap.data();
+    renderRoom();
+  });
 }
 
-async function joinRoom(){
-  if(CONFIG_IS_PLACEHOLDER){ S.error="Khassek dir Firebase config awalan."; render(); return; }
-  const code = S.joinCodeInput.trim().toUpperCase();
-  if(!code || !S.myName.trim()){ S.error="Kteb smiytek w code dyal ghorfa."; render(); return; }
-  const roomRef = doc(db,'rooms',code);
+window.backToHome = function(){
+  if(unsubRoom) unsubRoom();
+  currentRoomCode = null; currentRoom = null;
+  showScreen('screen-home');
+};
+
+window.copyRoomCode = function(){ navigator.clipboard?.writeText(currentRoomCode); };
+window.copyRoomLink = function(){ navigator.clipboard?.writeText(roomShareUrl()); };
+window.shareWhatsapp = function(){
+  const text = `Jini nl3bo Chkoun Howa! Dkhol mn hna: ${roomShareUrl()}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+};
+window.nativeShare = function(){
+  if(navigator.share){
+    navigator.share({ title:'Chkoun Howa', text:'Jini nl3bo m3aya Chkoun Howa!', url: roomShareUrl() }).catch(()=>{});
+  } else {
+    copyRoomLink();
+  }
+};
+
+// ---------- RENDER ----------
+function renderRoom(){
+  const room = currentRoom;
+  if(!room) return;
+
+  if(room.status === 'lobby'){
+    document.getElementById('room-code-display').textContent = currentRoomCode;
+    document.getElementById('lobby-players').innerHTML = room.players.map(p=>`<div class="player-chip">${p.name}</div>`).join('');
+    const isHost = room.hostUid === currentUser.uid;
+    const startBtn = document.getElementById('start-game-btn');
+    startBtn.style.display = isHost ? 'block' : 'none';
+    startBtn.disabled = room.players.length < 2;
+    document.getElementById('lobby-wait-msg').style.display = isHost ? 'none' : 'block';
+    showScreen('screen-lobby');
+    return;
+  }
+
+  if(room.status === 'finished'){
+    const winner = room.players.find(p=>p.uid===room.winnerUid);
+    document.getElementById('winner-name').textContent = winner ? winner.name : '?';
+    showScreen('screen-winner');
+    return;
+  }
+
+  renderScoreboard();
+  switch(room.phase){
+    case 'turn': renderTurnScreen(); break;
+    case 'describing': renderDescribingScreen(); break;
+    case 'reveal': renderRevealScreen(); break;
+    case 'question': renderQuestionScreen(); break;
+    default: break;
+  }
+}
+
+function myPlayer(){ return currentRoom.players.find(p=>p.uid===currentUser.uid); }
+function playerByUid(uid){ return currentRoom.players.find(p=>p.uid===uid); }
+
+function renderScoreboard(){
+  const el = document.getElementById('scoreboard-turn');
+  if(!el) return;
+  el.innerHTML = currentRoom.players.map(p=>{
+    let cls='score-chip';
+    if(p.out) cls+=' out';
+    if(p.uid===currentRoom.describerUid) cls+=' turn';
+    return `<div class="${cls}">${p.name}: ${p.hand.length}</div>`;
+  }).join('');
+}
+
+function renderTurnScreen(){
+  const describer = playerByUid(currentRoom.describerUid);
+  document.getElementById('turn-player-name').textContent = describer.name;
+  const isMe = currentRoom.describerUid === currentUser.uid;
+  document.getElementById('turn-sub-msg').textContent = isMe
+    ? "Dawr dyalek! Kbes bach tchouf cartes dyalek."
+    : "Katsna " + describer.name + " bach yakhtar card...";
+  document.getElementById('open-hand-btn').style.display = isMe ? 'block' : 'none';
+  showScreen('screen-turn');
+}
+
+window.openHandForDescribe = function(){
+  describeSelection = null;
+  const grid = document.getElementById('describe-hand-grid');
+  const hand = myPlayer().hand;
+  grid.innerHTML = hand.map((c,idx)=>`<div class="mini-card" data-idx="${idx}" onclick="window.selectDescribeCard(${idx})">${c.name}</div>`).join('');
+  document.getElementById('confirm-describe-btn').style.display='none';
+  showScreen('screen-describe-hand');
+};
+window.selectDescribeCard = function(idx){
+  describeSelection = idx;
+  document.querySelectorAll('#describe-hand-grid .mini-card').forEach(el=>el.classList.remove('selected'));
+  document.querySelector(`#describe-hand-grid .mini-card[data-idx="${idx}"]`).classList.add('selected');
+  document.getElementById('confirm-describe-btn').style.display='block';
+};
+window.confirmDescribeCard = async function(){
+  const players = JSON.parse(JSON.stringify(currentRoom.players));
+  const me = players.find(p=>p.uid===currentUser.uid);
+  const card = me.hand.splice(describeSelection,1)[0];
+  await updateDoc(doc(db,'rooms',currentRoomCode), {
+    players, describeCard: card, phase: 'describing', guesserUid:null, liveDescription:'', updatedAt: Date.now()
+  });
+};
+
+function renderDescribingScreen(){
+  const describer = playerByUid(currentRoom.describerUid);
+  document.getElementById('describing-name').textContent = describer.name + " kaywsef...";
+  const isMe = currentRoom.describerUid === currentUser.uid;
+  const guesserActive = !!currentRoom.guesserUid;
+
+  document.getElementById('describer-mic-controls').style.display = (isMe && !guesserActive) ? 'block' : 'none';
+  document.getElementById('skip-btn').style.display = (isMe && !guesserActive) ? 'block' : 'none';
+
+  const liveBox = document.getElementById('live-desc-box');
+  if(currentRoom.liveDescription){
+    liveBox.textContent = '💬 ' + currentRoom.liveDescription;
+    liveBox.classList.remove('empty');
+  } else {
+    liveBox.textContent = isMe ? 'Sta3mel l-mic wla kteb wasf...' : 'Katsna wasf...';
+    liveBox.classList.add('empty');
+  }
+  if(!isMe && document.getElementById('desc-textarea').value !== (currentRoom.liveDescription||'')){
+    // no-op: textarea only used by describer, others rely on live-desc-box
+  }
+
+  const selfSelectBox = document.getElementById('guesser-self-select');
+  const list = document.getElementById('self-guess-list');
+  const waiter = document.getElementById('waiter-msg');
+
+  if(guesserActive){
+    selfSelectBox.style.display='none';
+    if(currentRoom.guesserUid === currentUser.uid){
+      openGuesserHand();
+      return;
+    } else {
+      waiter.style.display='block';
+      waiter.textContent = "Katsna guess dyal " + (playerByUid(currentRoom.guesserUid)?.name || '...') + "...";
+    }
+  } else {
+    waiter.style.display='none';
+    const eligible = !isMe && !myPlayer().out && myPlayer().hand.length>0;
+    if(eligible){
+      selfSelectBox.style.display='block';
+      list.innerHTML = `<button class="btn btn-gold" onclick="window.claimGuesser()">🙋 Ana N7ammen!</button>`;
+    } else {
+      selfSelectBox.style.display='none';
+    }
+  }
+  showScreen('screen-describing');
+}
+
+// ---------- MIC / SPEECH ----------
+function setupRecognition(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) return null;
+  const r = new SR();
+  r.continuous = true;
+  r.interimResults = true;
+  r.lang = 'ar-MA';
+  r.onresult = (e)=>{
+    let text = '';
+    for(let i=0;i<e.results.length;i++){ text += e.results[i][0].transcript + ' '; }
+    document.getElementById('desc-textarea').value = text.trim();
+    debouncedWriteLiveDescription(text.trim());
+  };
+  r.onend = ()=>{ if(isRecording){ try{ r.start(); }catch(e){} } };
+  r.onerror = ()=>{};
+  return r;
+}
+window.toggleMic = function(){
+  const btn = document.getElementById('mic-btn');
+  if(!recognition) recognition = setupRecognition();
+  if(!recognition){
+    showError('home-error','Mic ma khdamch f had browser, sta3mel l-textarea bach tkteb wasf.');
+    return;
+  }
+  if(!isRecording){
+    isRecording = true;
+    recognition.start();
+    btn.textContent = '⏹ Wa9ef';
+    btn.classList.add('recording');
+  } else {
+    isRecording = false;
+    recognition.stop();
+    btn.textContent = '🎤 Bda Twasef';
+    btn.classList.remove('recording');
+  }
+};
+window.onDescTextInput = function(){
+  const val = document.getElementById('desc-textarea').value;
+  debouncedWriteLiveDescription(val);
+};
+function debouncedWriteLiveDescription(text){
+  clearTimeout(descTextDebounce);
+  descTextDebounce = setTimeout(async ()=>{
+    if(!currentRoomCode || !currentRoom || currentRoom.describerUid !== currentUser.uid) return;
+    await updateDoc(doc(db,'rooms',currentRoomCode), { liveDescription: text, updatedAt: Date.now() });
+  }, 500);
+}
+
+window.noOneGuessed = async function(){
+  if(isRecording && recognition){ isRecording=false; recognition.stop(); }
+  const players = JSON.parse(JSON.stringify(currentRoom.players));
+  const describer = players.find(p=>p.uid===currentRoom.describerUid);
+  describer.hand.push(currentRoom.describeCard);
+  const nextUid = nextActiveUidFromPlayers(players, currentRoom.describerUid);
+  document.getElementById('desc-textarea').value='';
+  await updateDoc(doc(db,'rooms',currentRoomCode), {
+    players, describeCard:null, describerUid: nextUid, phase:'turn', liveDescription:'', guesserUid:null, updatedAt: Date.now()
+  });
+};
+
+// ---------- SELF-SELECT GUESSER (transaction to avoid double-claim) ----------
+window.claimGuesser = async function(){
+  const roomRef = doc(db,'rooms',currentRoomCode);
   try{
     await runTransaction(db, async (tx)=>{
       const snap = await tx.get(roomRef);
-      if(!snap.exists()) throw new Error("Had l-ghorfa mabghach mawjouda.");
       const data = snap.data();
-      if(data.phase!=='lobby') throw new Error("L3ab bda mn 9bel, ma tqdrch dkhol daba.");
-      if(data.players.length>=8) throw new Error("Ghorfa 3amra (8 max).");
-      if(data.players.some(p=>p.id===S.myId)) return;
-      const players=[...data.players,{id:S.myId,name:S.myName.trim(),lives:0,eliminated:false}];
-      tx.update(roomRef,{players});
+      if(data.phase !== 'describing' || data.guesserUid){ return; }
+      tx.update(roomRef, { guesserUid: currentUser.uid, updatedAt: Date.now() });
     });
-    S.code = code;
-    subscribeRoom(code);
-    S.screen='lobby'; S.error=null; render();
-  }catch(e){
-    S.error = e.message || "Chi mochkil f connexion.";
-    render();
-  }
-}
-
-function subscribeRoom(code){
-  if(S.unsub) S.unsub();
-  const roomRef = doc(db,'rooms',code);
-  S.unsub = onSnapshot(roomRef,(snap)=>{
-    if(!snap.exists()){ S.room=null; return; }
-    S.room = snap.data();
-    checkMyElimination();
-    render();
-  });
-}
-
-async function startGame(){
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{
-    const snap = await tx.get(roomRef);
-    const data = snap.data();
-    if(data.players.length<2) return;
-    const lives = cardsPerPlayer(data.players.length);
-    const players = data.players.map(p=>({...p,lives,eliminated:false}));
-    tx.update(roomRef,{players,phase:'picking',describerIndex:0,round:1,usedCharacterIds:[],targetCharacterId:null,guesses:[],winnerId:null});
-  });
-}
-
-async function pickTarget(characterId){
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{
-    const snap = await tx.get(roomRef);
-    const data = snap.data();
-    tx.update(roomRef,{targetCharacterId:characterId, usedCharacterIds:[...data.usedCharacterIds,characterId], phase:'describing'});
-  });
-}
-
-function startDescribingTimer(){
-  if(S.describingTimerHandle) return;
-  S.describingTimerSeconds=30;
-  S.describingTimerHandle = setInterval(()=>{
-    S.describingTimerSeconds--;
-    const el=document.getElementById('timerDisplay');
-    if(el) el.textContent = Math.max(S.describingTimerSeconds,0);
-    if(S.describingTimerSeconds<=0){ clearInterval(S.describingTimerHandle); S.describingTimerHandle=null; }
-  },1000);
-}
-
-async function finishDescribing(){
-  if(S.describingTimerHandle){ clearInterval(S.describingTimerHandle); S.describingTimerHandle=null; }
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{
-    tx.update(roomRef,{phase:'guessing', guesses:[]});
-  });
-}
-
-async function submitGuess(characterId){
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{
-    const snap = await tx.get(roomRef);
-    const data = snap.data();
-    if(data.guesses.some(g=>g.playerId===S.myId)) return;
-    const guesses=[...data.guesses,{playerId:S.myId, characterId, ts:Date.now()}];
-    tx.update(roomRef,{guesses});
-  });
-  S.selectedCharId=null;
-}
-
-async function lockGuessing(){
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{ tx.update(roomRef,{phase:'reveal'}); });
-}
-
-async function applyReveal(){
-  const roomRef = doc(db,'rooms',S.code);
-  await runTransaction(db, async (tx)=>{
-    const snap = await tx.get(roomRef);
-    const data = snap.data();
-    const players = data.players.map(p=>({...p}));
-    const describer = players[data.describerIndex];
-    const sorted = [...data.guesses].sort((a,b)=>a.ts-b.ts);
-    let claimed=false;
-    sorted.forEach(g=>{
-      const guesser = players.find(p=>p.id===g.playerId);
-      if(!guesser) return;
-      if(g.characterId===data.targetCharacterId && !claimed){
-        guesser.lives+=1; describer.lives-=1; claimed=true;
-      } else if(g.characterId!==data.targetCharacterId){
-        guesser.lives-=1; describer.lives+=1;
-      }
-    });
-    players.forEach(p=>{ if(p.lives<=0) p.eliminated=true; });
-    const remaining = players.filter(p=>!p.eliminated);
-    let update;
-    if(remaining.length<=1){
-      update = {players, phase:'winner', winnerId: remaining[0]? remaining[0].id : null};
-    } else {
-      let nextIdx = data.describerIndex;
-      for(let step=1; step<=players.length; step++){
-        const idx=(data.describerIndex+step)%players.length;
-        if(!players[idx].eliminated){ nextIdx=idx; break; }
-      }
-      let usedIds = data.usedCharacterIds;
-      const pool = poolForDifficulty(data.difficulty);
-      if(usedIds.length >= pool.length) usedIds=[];
-      update = {players, phase:'picking', describerIndex:nextIdx, round:data.round+1, targetCharacterId:null, guesses:[], usedCharacterIds:usedIds};
-    }
-    tx.update(roomRef, update);
-  });
-}
-
-function checkMyElimination(){
-  if(!S.room) return;
-  const me = S.room.players.find(p=>p.id===S.myId);
-  if(me && me.eliminated && !S.lastEliminatedShown){
-    S.lastEliminatedShown=true;
-    S.showElimModal=true;
-    S.elimQuestion = EMBARRASSING_QUESTIONS[Math.floor(Math.random()*EMBARRASSING_QUESTIONS.length)];
-  }
-  if(me && !me.eliminated){ S.lastEliminatedShown=false; }
-}
-
-function leaveToHome(){
-  if(S.unsub) S.unsub();
-  S = {...S, screen:'home', room:null, code:null, error:null, lastEliminatedShown:false, showElimModal:false};
-  render();
-}
-
-// ---------------- RENDER ----------------
-function render(){
-  const app = document.getElementById('app');
-  app.innerHTML='';
-  const rulesBtn=document.createElement('button');
-  rulesBtn.className='rules-btn'; rulesBtn.textContent='9wanin';
-  rulesBtn.onclick=()=>{ S.rulesOpen=true; render(); };
-  app.appendChild(rulesBtn);
-
-  const wrap=document.createElement('div');
-  wrap.style.display='flex'; wrap.style.flexDirection='column'; wrap.style.flex='1'; wrap.style.marginTop='26px';
-
-  if(S.screen==='home') wrap.appendChild(renderHome());
-  else if(!S.room) wrap.appendChild(renderLoading());
-  else if(S.room.phase==='lobby') wrap.appendChild(renderLobby());
-  else if(S.room.phase==='picking') wrap.appendChild(renderPicking());
-  else if(S.room.phase==='describing') wrap.appendChild(renderDescribing());
-  else if(S.room.phase==='guessing') wrap.appendChild(renderGuessing());
-  else if(S.room.phase==='reveal') wrap.appendChild(renderReveal());
-  else if(S.room.phase==='winner') wrap.appendChild(renderWinnerScreen());
-
-  app.appendChild(wrap);
-  if(S.rulesOpen) app.appendChild(renderRulesModal());
-  if(S.showElimModal) app.appendChild(renderElimModal());
-}
-
-function characterPicker(pool, onConfirm, excludeUsed){
-  const box=document.createElement('div');
-  const search=document.createElement('input');
-  search.className='text-input search-input';
-  search.placeholder='9lb 3la smiya...';
-  search.value=S.searchText;
-  search.oninput=(e)=>{ S.searchText=e.target.value; renderGridInto(); };
-  box.appendChild(search);
-  const grid=document.createElement('div');
-  grid.className='card-grid';
-  box.appendChild(grid);
-  function renderGridInto(){
-    grid.innerHTML='';
-    const usedSet = new Set(S.room.usedCharacterIds||[]);
-    pool.filter(c=>c.name.toLowerCase().includes(S.searchText.toLowerCase()))
-      .forEach(c=>{
-        const isUsed = excludeUsed && usedSet.has(c.id);
-        const el=document.createElement('div');
-        el.className='pcard'+(isUsed?' used':'')+(S.selectedCharId===c.id?' selected':'');
-        el.innerHTML = `<div class="tag-row"><span class="cat-tag cat-${c.cat}">${CAT_LABEL[c.cat]}</span><span class="diff-tag diff-${c.diff}">${DIFF_LABEL[c.diff]}</span></div><span class="cname">${escapeHtml(c.name)}</span>`;
-        if(!isUsed){
-          el.onclick=()=>{ S.selectedCharId=c.id; confirmBtn.disabled=false; renderGridInto(); };
-        }
-        grid.appendChild(el);
-      });
-  }
-  renderGridInto();
-  const spacer=document.createElement('div'); spacer.className='grow'; box.appendChild(spacer);
-  const confirmBtn=document.createElement('button');
-  confirmBtn.className='btn btn-primary';
-  confirmBtn.textContent='Confirmi';
-  confirmBtn.disabled = S.selectedCharId===null;
-  confirmBtn.onclick=()=>{ if(S.selectedCharId!==null) onConfirm(S.selectedCharId); };
-  box.appendChild(confirmBtn);
-  return box;
-}
-
-function renderHome(){
-  const d=document.createElement('div');
-  d.innerHTML=`<h1 class="brand">Chkoun <span>Howa؟</span></h1><p class="tagline">Online — kola wa7d b téléphone dyalo.</p>`;
-  if(CONFIG_IS_PLACEHOLDER){
-    const warn=document.createElement('div');
-    warn.className='config-warning';
-    warn.innerHTML = `⚠️ Firebase mazal ma tconfigurach. 7el l-code dyal had l-page, 9elleb 3la <code>firebaseConfig</code> f top, w 3awad l-config dyal Firebase project dyalek (Firestore f test mode).`;
-    d.appendChild(warn);
-  }
-  if(S.error){ const e=document.createElement('div'); e.className='error-box'; e.textContent=S.error; d.appendChild(e); }
-  const nameInput=document.createElement('input');
-  nameInput.className='text-input'; nameInput.placeholder='Smiytek';
-  nameInput.value=S.myName; nameInput.style.marginBottom='14px';
-  nameInput.oninput=(e)=>{ S.myName=e.target.value; };
-  d.appendChild(nameInput);
-
-  const createBtn=document.createElement('button');
-  createBtn.className='btn btn-primary'; createBtn.style.marginBottom='10px';
-  createBtn.textContent='Sawb ghorfa jdida 🏠';
-  createBtn.onclick=()=>{ if(!S.myName.trim()){ S.error='Kteb smiytek awalan.'; render(); return;} S.screen='create-setup'; S.error=null; render(); };
-  d.appendChild(createBtn);
-
-  const spacer=document.createElement('div'); spacer.style.height='8px'; d.appendChild(spacer);
-  const codeInput=document.createElement('input');
-  codeInput.className='text-input'; codeInput.placeholder='Code dyal ghorfa (5 hrouf)';
-  codeInput.style.marginBottom='10px'; codeInput.style.textTransform='uppercase';
-  codeInput.value=S.joinCodeInput;
-  codeInput.oninput=(e)=>{ S.joinCodeInput=e.target.value; };
-  d.appendChild(codeInput);
-  const joinBtn=document.createElement('button');
-  joinBtn.className='btn btn-secondary';
-  joinBtn.textContent='Dkhol l ghorfa 🚪';
-  joinBtn.onclick=joinRoom;
-  d.appendChild(joinBtn);
-  return d;
-}
-
-function renderLoading(){
-  const d=document.createElement('div');
-  d.className='pass-screen';
-  d.innerHTML=`<p class="hint">Kayet7ml l-ghorfa...</p>`;
-  return d;
-}
-
-function renderLobby(){
-  const room=S.room;
-  const d=document.createElement('div');
-  d.innerHTML=`<h2 class="screen-title">Ghorfa dyal l3ab</h2><p class="hint">Partaji had code m3a l-shab (WhatsApp, Instagram...):</p>`;
-  const codeDiv=document.createElement('div'); codeDiv.className='code-display'; codeDiv.textContent=S.code;
-  d.appendChild(codeDiv);
-  const diffNote=document.createElement('p'); diffNote.className='hint';
-  diffNote.textContent = `So3oba: ${room.difficulty==='all'?'Kolchi mkhalt':DIFF_LABEL[room.difficulty]} — ${room.players.length} player(s) dakhlin`;
-  d.appendChild(diffNote);
-  room.players.forEach(p=>{
-    const row=document.createElement('div');
-    row.className='player-row'+(p.id===S.myId?' me':'');
-    row.innerHTML=`<span>${escapeHtml(p.name)}${p.id===room.hostId?' 👑':''}</span>`;
-    d.appendChild(row);
-  });
-  const spacer=document.createElement('div'); spacer.className='grow'; d.appendChild(spacer);
-  if(room.hostId===S.myId){
-    const startBtn=document.createElement('button');
-    startBtn.className='btn btn-primary';
-    startBtn.textContent='Bda l3ab 🎲';
-    startBtn.disabled = room.players.length<2;
-    startBtn.onclick=startGame;
-    d.appendChild(startBtn);
-    if(room.players.length<2){
-      const note=document.createElement('p'); note.className='hint'; note.style.textAlign='center'; note.style.marginTop='8px';
-      note.textContent='Khassek 3la l-9al 2 players bach tbda.';
-      d.appendChild(note);
-    }
-  } else {
-    const note=document.createElement('p'); note.className='hint'; note.style.textAlign='center';
-    note.textContent='Katsna host bach ybda l3ab...';
-    d.appendChild(note);
-  }
-  return d;
-}
-
-function renderPicking(){
-  const room=S.room;
-  const describer=room.players[room.describerIndex];
-  const d=document.createElement('div');
-  if(describer.id===S.myId){
-    d.innerHTML=`<h2 class="screen-title">Khtar chakhsiya bach twsefha</h2><p class="hint">L-baqi ma yshoufouch had l-choix dyalek.</p>`;
-    d.appendChild(characterPicker(poolForDifficulty(room.difficulty), (id)=>{ S.selectedCharId=null; S.searchText=''; pickTarget(id); }, true));
-  } else {
-    d.className+=''; d.appendChild(renderWaitScreen(`${describer.name} rah kaykhtar chakhsiya...`,'⏳'));
-  }
-  return d;
-}
-
-function renderWaitScreen(msg, emoji){
-  const d=document.createElement('div');
-  d.className='pass-screen';
-  d.innerHTML=`<div class="pass-avatar" style="font-size:30px;">${emoji}</div><p class="hint" style="text-align:center;font-size:15px;">${escapeHtml(msg)}</p>`;
-  appendScoreboard(d);
-  return d;
-}
-
-function appendScoreboard(container){
-  const room=S.room;
-  const box=document.createElement('div'); box.style.width='100%'; box.style.marginTop='14px';
-  room.players.forEach((p,idx)=>{
-    const row=document.createElement('div');
-    row.className='player-row'+(p.eliminated?' eliminated':'')+(p.id===S.myId?' me':'');
-    row.innerHTML=`<span>${escapeHtml(p.name)}${idx===room.describerIndex?'<span class="desc-tag">🎙️ Describer</span>':''}</span><span class="lives">${p.lives} ❤️</span>`;
-    box.appendChild(row);
-  });
-  container.appendChild(box);
-}
-
-function renderDescribing(){
-  const room=S.room;
-  const describer=room.players[room.describerIndex];
-  const d=document.createElement('div');
-  if(describer.id===S.myId){
-    d.innerHTML=`<h2 class="screen-title">Daba wsef biha! 🎙️</h2>
-      <p class="hint">B sotek, wsef l-chakhsiya bla ma tsemmiha b l-esm.</p>
-      <div class="timer" id="timerDisplay">30</div>`;
-    const startBtn=document.createElement('button');
-    startBtn.className='btn btn-secondary'; startBtn.textContent='Bda l-compteur ⏱️';
-    startBtn.onclick=()=>{ startDescribingTimer(); startBtn.disabled=true; };
-    d.appendChild(startBtn);
-    const spacer=document.createElement('div'); spacer.className='grow'; d.appendChild(spacer);
-    const doneBtn=document.createElement('button');
-    doneBtn.className='btn btn-primary'; doneBtn.style.marginTop='14px';
-    doneBtn.textContent='Khlast, bda l-khamin ➜';
-    doneBtn.onclick=finishDescribing;
-    d.appendChild(doneBtn);
-  } else {
-    d.appendChild(renderWaitScreen(`${describer.name} kaywsef daba — sm3o mzyan!`,'🎙️'));
-  }
-  return d;
-}
-
-function renderGuessing(){
-  const room=S.room;
-  const describer=room.players[room.describerIndex];
-  const me = room.players.find(p=>p.id===S.myId);
-  const alreadyGuessed = room.guesses.some(g=>g.playerId===S.myId);
-  const d=document.createElement('div');
-  if(describer.id===S.myId){
-    d.innerHTML=`<h2 class="screen-title">L-khamin f-9asa 🤔</h2><p class="hint">${room.guesses.length} khamnou 7ta daba. Sedd mnin bghiti.</p>`;
-    const list=document.createElement('div');
-    room.players.forEach(p=>{
-      if(p.id===describer.id) return;
-      const guessed = room.guesses.some(g=>g.playerId===p.id);
-      const row=document.createElement('div'); row.className='player-row'+(p.eliminated?' eliminated':'');
-      row.innerHTML=`<span>${escapeHtml(p.name)}</span><span>${p.eliminated?'khsar':(guessed?'✅ khamnu':'⏳ mazal')}</span>`;
-      list.appendChild(row);
-    });
-    d.appendChild(list);
-    const spacer=document.createElement('div'); spacer.className='grow'; d.appendChild(spacer);
-    const lockBtn=document.createElement('button');
-    lockBtn.className='btn btn-primary'; lockBtn.textContent='Sedd l-khamin, chouf natija ➜';
-    lockBtn.onclick=lockGuessing;
-    d.appendChild(lockBtn);
-  } else if(me.eliminated){
-    d.appendChild(renderWaitScreen('Nta khsarti f had l-jawla, tsna l-jawla li jaya...','😅'));
-  } else if(alreadyGuessed){
-    d.appendChild(renderWaitScreen('Sift l-guess dyalek! Tsna l-baqi...','✅'));
-  } else {
-    d.innerHTML=`<h2 class="screen-title">Chkoun taybane lik hiya?</h2><p class="hint">Khtar l-chakhsiya li twesfat.</p>`;
-    d.appendChild(characterPicker(poolForDifficulty(room.difficulty), (id)=>{ S.selectedCharId=null; S.searchText=''; submitGuess(id); }, false));
-  }
-  return d;
-}
-
-function renderReveal(){
-  const room=S.room;
-  const describer=room.players[room.describerIndex];
-  const targetCard=findCard(room.targetCharacterId);
-  const d=document.createElement('div');
-  d.innerHTML=`<h2 class="screen-title">L-Kachf! 🎭</h2>`;
-  const tDiv=document.createElement('div'); tDiv.className='target-card';
-  tDiv.innerHTML=`<div class="lbl">L-chakhsiya li twesfat mn ${escapeHtml(describer.name)}</div><div class="name">${escapeHtml(targetCard.name)}</div>`;
-  d.appendChild(tDiv);
-  const sorted=[...room.guesses].sort((a,b)=>a.ts-b.ts);
-  let claimed=false;
-  sorted.forEach(g=>{
-    const guesser=room.players.find(p=>p.id===g.playerId);
-    const c=findCard(g.characterId);
-    let badge,cls;
-    if(g.characterId===room.targetCharacterId && !claimed){ badge='Sa77 ✅'; cls='match'; claimed=true; }
-    else if(g.characterId===room.targetCharacterId && claimed){ badge='Mte5er ⏱️'; cls='late'; }
-    else { badge='Ghalat ❌'; cls='nomatch'; }
-    const row=document.createElement('div'); row.className='reveal-row';
-    row.innerHTML=`<div><div class="who">${escapeHtml(guesser.name)} khtar</div><div class="what">${escapeHtml(c.name)}</div></div><span class="badge ${cls}">${badge}</span>`;
-    d.appendChild(row);
-  });
-  if(sorted.length===0){
-    const row=document.createElement('div'); row.className='reveal-row';
-    row.innerHTML=`<div class="who">Hta wa7d ma guess.</div>`;
-    d.appendChild(row);
-  }
-  const spacer=document.createElement('div'); spacer.className='grow'; d.appendChild(spacer);
-  if(describer.id===S.myId){
-    const btn=document.createElement('button'); btn.className='btn btn-primary'; btn.textContent='Zid l-dawr li jay ➜';
-    btn.onclick=applyReveal;
-    d.appendChild(btn);
-  } else {
-    const note=document.createElement('p'); note.className='hint'; note.style.textAlign='center';
-    note.textContent='Katsna Describer bach ykml l-jawla...';
-    d.appendChild(note);
-  }
-  return d;
-}
-
-function renderWinnerScreen(){
-  const room=S.room;
-  const winner=room.players.find(p=>p.id===room.winnerId);
-  const d=document.createElement('div');
-  d.className='pass-screen';
-  d.innerHTML=`<div class="winner-emoji">🏆</div><div class="pass-name">${escapeHtml(winner?winner.name:'?')}</div><div class="pass-role">Howa l-Fa2iz!</div>`;
-  const btn=document.createElement('button'); btn.className='btn btn-primary'; btn.textContent='Rje3 l-daya 🏠';
-  btn.onclick=leaveToHome;
-  d.appendChild(btn);
-  return d;
-}
-
-function renderRulesModal(){
-  const bg=document.createElement('div'); bg.className='modal-bg';
-  bg.onclick=(e)=>{ if(e.target===bg){ S.rulesOpen=false; render(); } };
-  const m=document.createElement('div'); m.className='modal';
-  m.innerHTML=`<h3>Kifach kaymchi l3ab</h3><p style="text-align:right;font-size:13.5px;">
-    1. Kola l3ab 3ando access l nafs la liste dyal chakhsiyat (7sab so3oba li tkhtart).<br>
-    2. Describer kaykhtar wa7da w kaywsefha b sotu, bla ma ysemmiha.<br>
-    3. Ay wa7d bgha ykhamen, kaykhtar mn nafss la liste — f nafss lwe9t, hta wa7d ma kaystena.<br>
-    4. Sa77: guesser +1 ❤️, Describer -1 ❤️. Ghalat: guesser -1 ❤️, Describer +1 ❤️.<br>
-    5. Wsselti l 0 ❤️ → khsarti, kaytar7 lik soual mo7rij.<br>
-    6. Akhir wa7d bqa 3ando ❤️, howa l-fa2iz!</p>`;
-  const btn=document.createElement('button'); btn.className='btn btn-secondary'; btn.textContent='Fhemt 👍';
-  btn.onclick=()=>{ S.rulesOpen=false; render(); };
-  m.appendChild(btn); bg.appendChild(m); return bg;
-}
-
-function renderElimModal(){
-  const bg=document.createElement('div'); bg.className='modal-bg';
-  const m=document.createElement('div'); m.className='modal';
-  m.innerHTML=`<h3>Khsarti! 😅</h3><p>${escapeHtml(S.elimQuestion)}</p>`;
-  const btn=document.createElement('button'); btn.className='btn btn-primary'; btn.textContent='Fhemt, kmml l3ab';
-  btn.onclick=()=>{ S.showElimModal=false; render(); };
-  m.appendChild(btn); bg.appendChild(m); return bg;
-}
-
-// create-setup screen injected into render switch via S.screen check
-const originalRender = render;
-render = function(){
-  if(S.screen==='create-setup' && !S.room){
-    const app=document.getElementById('app');
-    app.innerHTML='';
-    const wrap=document.createElement('div');
-    wrap.style.display='flex'; wrap.style.flexDirection='column'; wrap.style.flex='1'; wrap.style.marginTop='10px';
-    wrap.innerHTML=`<h2 class="screen-title">Chkoun So3oba bghiti?</h2><p class="hint">Had l-so3oba ghatkoun nafsha l kola player.</p>`;
-    const chips=document.createElement('div'); chips.className='chip-list';
-    [['all','Kolchi mkhalt'],['easy','Sahla'],['medium','Motawasta'],['hard','Sa3ba']].forEach(([val,label])=>{
-      const chip=document.createElement('div');
-      chip.className='chip'+(S.difficultyChoice===val?' on':'');
-      chip.textContent=label;
-      chip.onclick=()=>{ S.difficultyChoice=val; render(); };
-      chips.appendChild(chip);
-    });
-    wrap.appendChild(chips);
-    if(S.error){ const e=document.createElement('div'); e.className='error-box'; e.textContent=S.error; wrap.appendChild(e); }
-    const spacer=document.createElement('div'); spacer.className='grow'; wrap.appendChild(spacer);
-    const btn=document.createElement('button'); btn.className='btn btn-primary'; btn.textContent='Sawb Ghorfa 🏠';
-    btn.onclick=createRoom;
-    wrap.appendChild(btn);
-    app.appendChild(wrap);
-    return;
-  }
-  originalRender();
+  }catch(e){ /* ignore race */ }
 };
 
-render();
+window.cancelMyGuess = async function(){
+  await updateDoc(doc(db,'rooms',currentRoomCode), { guesserUid:null, updatedAt: Date.now() });
+};
+
+function openGuesserHand(){
+  guessSelection = null;
+  const grid = document.getElementById('guesser-hand-grid');
+  const hand = myPlayer().hand;
+  grid.innerHTML = hand.map((c,idx)=>`<div class="mini-card" data-idx="${idx}" onclick="window.selectGuessCard(${idx})">${c.name}</div>`).join('');
+  document.getElementById('confirm-guess-btn').style.display='none';
+  showScreen('screen-guesser-hand');
+}
+window.selectGuessCard = function(idx){
+  guessSelection = idx;
+  document.querySelectorAll('#guesser-hand-grid .mini-card').forEach(el=>el.classList.remove('selected'));
+  document.querySelector(`#guesser-hand-grid .mini-card[data-idx="${idx}"]`).classList.add('selected');
+  document.getElementById('confirm-guess-btn').style.display='block';
+};
+window.confirmGuessCard = async function(){
+  const players = JSON.parse(JSON.stringify(currentRoom.players));
+  const me = players.find(p=>p.uid===currentUser.uid);
+  const card = me.hand.splice(guessSelection,1)[0];
+  const describeCard = currentRoom.describeCard;
+  const match = describeCard.characterId === card.characterId;
+
+  if(match){
+    const winnerP = players.find(p=>p.uid===currentUser.uid);
+    winnerP.hand.push(describeCard, card);
+  } else {
+    const describerP = players.find(p=>p.uid===currentRoom.describerUid);
+    describerP.hand.push(describeCard, card);
+  }
+
+  await updateDoc(doc(db,'rooms',currentRoomCode), {
+    players, guessCard: card, phase: 'reveal', liveDescription:'', updatedAt: Date.now()
+  });
+};
+
+function renderRevealScreen(){
+  const describeCard = currentRoom.describeCard;
+  const guessCard = currentRoom.guessCard;
+  const match = describeCard.characterId === guessCard.characterId;
+  const banner = document.getElementById('result-banner');
+  banner.textContent = match ? "✅ MATCH! Nafs Chakhsiya!" : "❌ Machi Hiya!";
+  banner.className = 'result-banner ' + (match?'match':'nomatch');
+  document.getElementById('reveal-describer-label').textContent = playerByUid(currentRoom.describerUid).name + " (Description)";
+  document.getElementById('reveal-guesser-label').textContent = playerByUid(currentRoom.guesserUid).name + " (Guess)";
+  document.getElementById('reveal-describe-card').innerHTML =
+    `<div class="era-tag ${describeCard.era==='jdida'?'jdida':''}">${describeCard.era==='9dima'?'📜 9dima':'✨ Jdida'}</div><div class="char-name">${describeCard.name}</div>`;
+  document.getElementById('reveal-guess-card').innerHTML =
+    `<div class="era-tag ${guessCard.era==='jdida'?'jdida':''}">${guessCard.era==='9dima'?'📜 9dima':'✨ Jdida'}</div><div class="char-name">${guessCard.name}</div>`;
+
+  const isDescriber = currentRoom.describerUid === currentUser.uid;
+  document.getElementById('reveal-continue-btn').style.display = isDescriber ? 'block' : 'none';
+  document.getElementById('reveal-waiter').style.display = isDescriber ? 'none' : 'block';
+  showScreen('screen-reveal');
+}
+
+window.afterReveal = async function(){
+  document.getElementById('desc-textarea').value='';
+  const players = JSON.parse(JSON.stringify(currentRoom.players));
+  const elimUids = players.filter(p=>!p.out && p.hand.length===0).map(p=>p.uid);
+
+  if(elimUids.length>0){
+    const firstUid = elimUids[0];
+    const rest = elimUids.slice(1);
+    const p = players.find(pl=>pl.uid===firstUid);
+    p.out = true;
+    const q = MOHRIJ_QUESTIONS[Math.floor(Math.random()*MOHRIJ_QUESTIONS.length)];
+    await updateDoc(doc(db,'rooms',currentRoomCode), {
+      players, phase:'question', pendingElim: rest, guessCard:null, describeCard:null, guesserUid:null,
+      elimUid: firstUid, currentQuestion: q, updatedAt: Date.now()
+    });
+  } else {
+    await proceedAfterAllElims(players);
+  }
+};
+
+function renderQuestionScreen(){
+  const p = playerByUid(currentRoom.elimUid);
+  document.getElementById('elim-player-name').textContent = p ? p.name : '';
+  document.getElementById('mohrij-question').textContent = currentRoom.currentQuestion || '';
+  const isMe = currentRoom.elimUid === currentUser.uid;
+  document.getElementById('question-continue-btn').style.display = isMe ? 'block' : 'none';
+  document.getElementById('question-waiter').style.display = isMe ? 'none' : 'block';
+  showScreen('screen-question');
+}
+
+window.afterQuestion = async function(){
+  const players = JSON.parse(JSON.stringify(currentRoom.players));
+  const pending = currentRoom.pendingElim || [];
+  if(pending.length>0){
+    const nextUid = pending[0];
+    const rest = pending.slice(1);
+    const p = players.find(pl=>pl.uid===nextUid);
+    p.out = true;
+    const q = MOHRIJ_QUESTIONS[Math.floor(Math.random()*MOHRIJ_QUESTIONS.length)];
+    await updateDoc(doc(db,'rooms',currentRoomCode), {
+      players, pendingElim: rest, elimUid: nextUid, currentQuestion: q, updatedAt: Date.now()
+    });
+  } else {
+    await proceedAfterAllElims(players);
+  }
+};
+
+async function proceedAfterAllElims(players){
+  const active = players.filter(p=>!p.out);
+  if(active.length<=1){
+    const winner = active[0] || players.reduce((a,b)=> a.hand.length>=b.hand.length?a:b);
+    await updateDoc(doc(db,'rooms',currentRoomCode), {
+      players, status:'finished', winnerUid: winner.uid, updatedAt: Date.now()
+    });
+  } else {
+    const nextDescriberUid = nextActiveUidFromPlayers(players, currentRoom.describerUid);
+    await updateDoc(doc(db,'rooms',currentRoomCode), {
+      players, describerUid: nextDescriberUid, guesserUid:null, guessCard:null, describeCard:null,
+      liveDescription:'', phase:'turn', updatedAt: Date.now()
+    });
+  }
+}
+
+function nextActiveUidFromPlayers(players, fromUid){
+  const idx = players.findIndex(p=>p.uid===fromUid);
+  for(let step=1; step<=players.length; step++){
+    const i = (idx+step) % players.length;
+    if(!players[i].out) return players[i].uid;
+  }
+  return fromUid;
+}
+
+// ---------- START GAME (host) — equal hand size for everyone ----------
+window.startOnlineGame = async function(){
+  const room = currentRoom;
+  const numPlayers = room.players.length;
+  const numChars = computeNumChars(numPlayers);
+  const chosenChars = shuffle([...CHARACTERS]).slice(0, numChars);
+
+  let deck = [];
+  chosenChars.forEach(c=>{
+    deck.push({cardId:c.id+'_a', characterId:c.id, name:c.name, era:c.era});
+    deck.push({cardId:c.id+'_b', characterId:c.id, name:c.name, era:c.era});
+  });
+  shuffle(deck);
+  const players = JSON.parse(JSON.stringify(room.players)).map(p=>({...p, hand:[], out:false}));
+  let pi=0;
+  deck.forEach(card=>{ players[pi].hand.push(card); pi=(pi+1)%players.length; });
+
+  await updateDoc(doc(db,'rooms',currentRoomCode), {
+    players, status:'playing', phase:'turn',
+    describerUid: players[0].uid, guesserUid:null, describeCard:null, guessCard:null, liveDescription:'',
+    pendingElim:[], winnerUid:null, updatedAt: Date.now()
+  });
+};
 </script>
 </body>
 </html>
