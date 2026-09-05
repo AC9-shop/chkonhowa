@@ -354,6 +354,26 @@ const CHARACTERS = [
   {id:28, name:"Fnaire", era:"jdida", diff:"sa3b"},
   {id:29, name:"Nass El Ghiwane", era:"jdida", diff:"sa3b"},
   {id:30, name:"Asmaa Lamnawar", era:"jdida", diff:"sahl"},
+  {id:31, name:"Yacoub Al Mansour", era:"9dima", diff:"mtwaset"},
+  {id:32, name:"Abu Al Hassan Al Marini", era:"9dima", diff:"sa3b"},
+  {id:33, name:"Sidi Mohammed Ben Abdellah", era:"9dima", diff:"sa3b"},
+  {id:34, name:"Moha Ou Hammou Zayani", era:"9dima", diff:"sa3b"},
+  {id:35, name:"Ba Ahmed", era:"9dima", diff:"sa3b"},
+  {id:36, name:"Ahmed Sefrioui", era:"jdida", diff:"mtwaset"},
+  {id:37, name:"Driss Chraibi", era:"jdida", diff:"mtwaset"},
+  {id:38, name:"Abdellatif Laabi", era:"jdida", diff:"sa3b"},
+  {id:39, name:"Abdelhadi Belkhayat", era:"jdida", diff:"sahl"},
+  {id:40, name:"Naima Samih", era:"jdida", diff:"mtwaset"},
+  {id:41, name:"Samira Said", era:"jdida", diff:"sahl"},
+  {id:42, name:"Abdelwahab Doukkali", era:"jdida", diff:"mtwaset"},
+  {id:43, name:"Mohammed Rouicha", era:"jdida", diff:"mtwaset"},
+  {id:44, name:"Said Aouita", era:"jdida", diff:"sahl"},
+  {id:45, name:"Khalid Skah", era:"jdida", diff:"mtwaset"},
+  {id:46, name:"Mustapha Hadji", era:"jdida", diff:"sahl"},
+  {id:47, name:"Noureddine Naybet", era:"jdida", diff:"mtwaset"},
+  {id:48, name:"Hakim Ziyech", era:"jdida", diff:"sahl"},
+  {id:49, name:"Sofyan Amrabat", era:"jdida", diff:"mtwaset"},
+  {id:50, name:"Karim El Ahmadi", era:"jdida", diff:"mtwaset"},
 ];
 const DIFF_LABELS = {sahl:'🟢 Sahla', mtwaset:'🟠 Mtwasta', sa3b:'🔴 Sa3ba'};
 const MOHRIJ_QUESTIONS = [
@@ -448,12 +468,17 @@ onAuthStateChanged(auth, async (user)=>{
 // ---------- DECK SIZING (equal, reasonable hands for 2-8 players) ----------
 const HAND_SIZE_TABLE = {2:8,3:8,4:7,5:6,6:6,7:6,8:5};
 function computeDeckParams(numPlayers, pool){
-  const desiredHandSize = HAND_SIZE_TABLE[numPlayers] || 6;
-  const desiredNumChars = Math.max(1, Math.floor((numPlayers*desiredHandSize)/2));
-  let n = Math.min(desiredNumChars, pool.length);
-  while(n>1 && (2*n)%numPlayers!==0) n--;
-  if((2*n)%numPlayers!==0) n=1;
-  return n;
+  const poolSize = pool.length;
+  const target = HAND_SIZE_TABLE[numPlayers] || 6;
+  const desired = Math.min(poolSize, Math.max(1, Math.floor((numPlayers*target)/2)));
+  // search outward from the desired size for the nearest n<=poolSize that divides evenly among players
+  for(let delta=0; delta<=poolSize; delta++){
+    const down = desired - delta;
+    const up = desired + delta;
+    if(down>=1 && (2*down)%numPlayers===0) return down;
+    if(up<=poolSize && (2*up)%numPlayers===0) return up;
+  }
+  return poolSize; // last resort: use the whole pool (rare edge case)
 }
 
 // ---------- ROOM CREATE / JOIN ----------
