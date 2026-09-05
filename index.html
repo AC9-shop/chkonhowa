@@ -13,6 +13,7 @@
     --sand:#F3E4C3; --sand-dark:#E4CE9E;
     --gold:#C9A227; --maroon:#7B2D26;
     --ink:#241A12; --cream-text:#FBF2DD;
+    --green:#2E7D32; --orange:#B8720A; --red:#B23A2A;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;height:100%;}
@@ -34,7 +35,8 @@
     position:relative; z-index:1; box-shadow:0 30px 60px rgba(0,0,0,0.4);
   }
   h1.title{font-family:'Rakkas',serif; font-size:2.4rem; color:var(--gold); text-align:center; margin:0 0 2px;}
-  .subtitle{text-align:center; color:rgba(251,242,221,0.65); font-size:0.95rem; margin-bottom:24px; font-weight:600;}
+  .subtitle{text-align:center; color:rgba(251,242,221,0.65); font-size:0.95rem; margin-bottom:14px; font-weight:600;}
+  #leave-room-btn{display:none; width:auto; margin:0 auto 18px; padding:8px 16px; font-size:0.8rem;}
   .screen{display:none;}
   .screen.active{display:block; animation:fadein 0.35s ease;}
   @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
@@ -44,6 +46,8 @@
   input::placeholder{color:rgba(251,242,221,0.35); letter-spacing:normal; text-transform:none;}
   textarea{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(201,162,39,0.4);
     background:rgba(0,0,0,0.25); color:var(--cream-text); font-family:'Cairo',sans-serif; font-size:0.95rem; resize:vertical; min-height:60px;}
+  select{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(201,162,39,0.4);
+    background:rgba(0,0,0,0.35); color:var(--cream-text); font-family:'Cairo',sans-serif; font-size:0.95rem;}
   .btn{display:inline-block; width:100%; text-align:center; padding:14px 18px; border-radius:12px; border:none;
     font-family:'Cairo',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; margin-top:14px;
     transition:transform 0.12s ease, filter 0.12s ease;}
@@ -71,9 +75,13 @@
   .player-chip{background:rgba(0,0,0,0.25); border:1px solid rgba(201,162,39,0.3); border-radius:20px; padding:8px 16px; font-size:0.85rem; font-weight:700;}
   .card-face{background:linear-gradient(160deg, var(--sand), var(--sand-dark)); color:var(--ink); border-radius:14px;
     padding:26px 20px; text-align:center; border:3px solid var(--gold); box-shadow:0 12px 24px rgba(0,0,0,0.3);}
-  .card-face .era-tag{display:inline-block; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px;
-    margin-bottom:10px; background:var(--maroon); color:#fff;}
+  .card-face .badges{display:flex; gap:6px; justify-content:center; margin-bottom:10px; flex-wrap:wrap;}
+  .card-face .era-tag{display:inline-block; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px; background:var(--maroon); color:#fff;}
   .card-face .era-tag.jdida{background:var(--teal-mid);}
+  .card-face .diff-tag{display:inline-block; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px; color:#fff;}
+  .diff-tag.sahl{background:var(--green);}
+  .diff-tag.mtwaset{background:var(--orange);}
+  .diff-tag.sa3b{background:var(--red);}
   .card-face .char-name{font-family:'Rakkas',serif; font-size:1.6rem;}
   .card-back{background:repeating-linear-gradient(45deg, var(--teal-mid), var(--teal-mid) 10px, var(--teal-deep) 10px, var(--teal-deep) 20px);
     border-radius:14px; border:3px solid var(--gold); display:flex; align-items:center; justify-content:center;
@@ -97,8 +105,6 @@
   .result-banner{text-align:center; font-family:'Rakkas',serif; font-size:1.5rem; margin:18px 0 6px; padding:14px; border-radius:12px;}
   .result-banner.match{background:rgba(46,125,50,0.25); color:#8FE29A; border:1px solid rgba(46,125,50,0.5);}
   .result-banner.nomatch{background:rgba(193,68,14,0.2); color:#F0B27A; border:1px solid rgba(193,68,14,0.4);}
-  .guess-choices{display:flex; flex-direction:column; gap:8px; margin-top:12px;}
-  .guess-choices .btn{margin-top:0;}
   .winner-box{text-align:center; padding:20px 0;}
   .winner-box .trophy{font-size:3rem;}
   .winner-box .name{font-family:'Rakkas',serif; font-size:2rem; color:var(--gold); margin:8px 0;}
@@ -111,8 +117,6 @@
   @keyframes spin{to{transform:rotate(360deg);}}
   .user-badge{display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:10px;}
   .user-badge img{width:32px; height:32px; border-radius:50%; border:2px solid var(--gold);}
-  .link-btn{background:none; border:none; color:var(--gold); text-decoration:underline; cursor:pointer;
-    font-family:'Cairo',sans-serif; font-size:0.85rem; display:block; margin:14px auto 0; text-align:center; width:100%;}
   .error-msg{background:rgba(193,68,14,0.2); border:1px solid rgba(193,68,14,0.5); border-radius:10px; padding:10px 14px;
     font-size:0.85rem; text-align:center; margin-top:12px; display:none;}
   .live-desc-box{
@@ -125,6 +129,7 @@
   .self-guess-list{display:flex; flex-direction:column; gap:8px; margin-top:16px;}
   .self-guess-list .btn{margin-top:0;}
   .share-box{margin-top:18px; padding-top:16px; border-top:1px dashed rgba(201,162,39,0.3);}
+  .diff-info{font-size:0.75rem; color:rgba(251,242,221,0.55); margin-top:4px; text-align:center;}
   @media (max-width:480px){ .app{padding:22px 16px;} h1.title{font-size:1.9rem;} }
 </style>
 </head>
@@ -132,6 +137,7 @@
 <div class="app">
   <h1 class="title">شكون هو؟</h1>
   <div class="subtitle">Chkoun Howa Online — L3ab m3a S7abek 3n Bo3d</div>
+  <button class="btn btn-ghost" id="leave-room-btn" onclick="confirmLeave()">🚪 Kharej mn Ghorfa</button>
 
   <!-- AUTH -->
   <div class="screen active" id="screen-auth">
@@ -164,7 +170,17 @@
     <div class="center-msg"><div class="small">Sift had code wla rabt l s7abek bach ydkhlo (2-8 players)</div></div>
     <div class="room-code-display" id="room-code-display" onclick="copyRoomCode()"></div>
     <div class="player-chip-list" id="lobby-players"></div>
-    <button class="btn btn-primary" id="start-game-btn" style="display:none;" onclick="startOnlineGame()">🎴 Bda L3ab</button>
+
+    <div id="host-controls" style="display:none;">
+      <label>Sou3ouba dyal Chakhsiyat</label>
+      <select id="difficulty-select">
+        <option value="kolchi">🎭 Kolchi (30 chakhsiya)</option>
+        <option value="sahl">🟢 Sahla bark (chhirin bezaf)</option>
+        <option value="mtwaset">🟠 Mtwasta bark</option>
+        <option value="sa3b">🔴 Sa3ba bark (l-experts)</option>
+      </select>
+      <button class="btn btn-primary" id="start-game-btn" onclick="startOnlineGame()">🎴 Bda L3ab</button>
+    </div>
     <div class="center-msg small" id="lobby-wait-msg">Katsna l-host bach ybda l3ab...</div>
 
     <div class="share-box">
@@ -288,37 +304,38 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const CHARACTERS = [
-  {id:1, name:"Youssef Ibn Tachfin", era:"9dima"},
-  {id:2, name:"Idriss Al Awal", era:"9dima"},
-  {id:3, name:"Moulay Ismail", era:"9dima"},
-  {id:4, name:"Ahmed Al Mansour Addahbi", era:"9dima"},
-  {id:5, name:"Abd El Krim Al Khattabi", era:"9dima"},
-  {id:6, name:"Mohammed Al Khamis", era:"9dima"},
-  {id:7, name:"Al Hassan Ath-Thani", era:"9dima"},
-  {id:8, name:"Fatima Al Fihriya", era:"9dima"},
-  {id:9, name:"Ibn Battuta", era:"9dima"},
-  {id:10, name:"Hassan Al Wazzan", era:"9dima"},
-  {id:11, name:"Malika Al Fassi", era:"9dima"},
-  {id:12, name:"Allal Al Fassi", era:"9dima"},
-  {id:13, name:"Zaynab Nfissa", era:"9dima"},
-  {id:14, name:"Mohammed Choukri", era:"9dima"},
-  {id:15, name:"Fatema Mernissi", era:"9dima"},
-  {id:16, name:"Tahar Ben Jelloun", era:"jdida"},
-  {id:17, name:"Leila Slimani", era:"jdida"},
-  {id:18, name:"Nawal El Moutawakel", era:"jdida"},
-  {id:19, name:"Hicham El Guerrouj", era:"jdida"},
-  {id:20, name:"Achraf Hakimi", era:"jdida"},
-  {id:21, name:"Youssef En-Nesyri", era:"jdida"},
-  {id:22, name:"Walid Regragui", era:"jdida"},
-  {id:23, name:"Oum", era:"jdida"},
-  {id:24, name:"Hindi Zahra", era:"jdida"},
-  {id:25, name:"RedOne", era:"jdida"},
-  {id:26, name:"Jamel Debbouze", era:"jdida"},
-  {id:27, name:"Nabil Ayouch", era:"jdida"},
-  {id:28, name:"Fnaire", era:"jdida"},
-  {id:29, name:"Nass El Ghiwane", era:"jdida"},
-  {id:30, name:"Asmaa Lamnawar", era:"jdida"},
+  {id:1, name:"Youssef Ibn Tachfin", era:"9dima", diff:"mtwaset"},
+  {id:2, name:"Idriss Al Awal", era:"9dima", diff:"mtwaset"},
+  {id:3, name:"Moulay Ismail", era:"9dima", diff:"sahl"},
+  {id:4, name:"Ahmed Al Mansour Addahbi", era:"9dima", diff:"sa3b"},
+  {id:5, name:"Abd El Krim Al Khattabi", era:"9dima", diff:"mtwaset"},
+  {id:6, name:"Mohammed Al Khamis", era:"9dima", diff:"sahl"},
+  {id:7, name:"Al Hassan Ath-Thani", era:"9dima", diff:"sahl"},
+  {id:8, name:"Fatima Al Fihriya", era:"9dima", diff:"mtwaset"},
+  {id:9, name:"Ibn Battuta", era:"9dima", diff:"mtwaset"},
+  {id:10, name:"Hassan Al Wazzan", era:"9dima", diff:"sa3b"},
+  {id:11, name:"Malika Al Fassi", era:"9dima", diff:"sa3b"},
+  {id:12, name:"Allal Al Fassi", era:"9dima", diff:"sa3b"},
+  {id:13, name:"Zaynab Nfissa", era:"9dima", diff:"sa3b"},
+  {id:14, name:"Mohammed Choukri", era:"9dima", diff:"sa3b"},
+  {id:15, name:"Fatema Mernissi", era:"9dima", diff:"sa3b"},
+  {id:16, name:"Tahar Ben Jelloun", era:"jdida", diff:"mtwaset"},
+  {id:17, name:"Leila Slimani", era:"jdida", diff:"mtwaset"},
+  {id:18, name:"Nawal El Moutawakel", era:"jdida", diff:"mtwaset"},
+  {id:19, name:"Hicham El Guerrouj", era:"jdida", diff:"sahl"},
+  {id:20, name:"Achraf Hakimi", era:"jdida", diff:"sahl"},
+  {id:21, name:"Youssef En-Nesyri", era:"jdida", diff:"sahl"},
+  {id:22, name:"Walid Regragui", era:"jdida", diff:"sahl"},
+  {id:23, name:"Oum", era:"jdida", diff:"sahl"},
+  {id:24, name:"Hindi Zahra", era:"jdida", diff:"mtwaset"},
+  {id:25, name:"RedOne", era:"jdida", diff:"sahl"},
+  {id:26, name:"Jamel Debbouze", era:"jdida", diff:"sahl"},
+  {id:27, name:"Nabil Ayouch", era:"jdida", diff:"mtwaset"},
+  {id:28, name:"Fnaire", era:"jdida", diff:"sa3b"},
+  {id:29, name:"Nass El Ghiwane", era:"jdida", diff:"sa3b"},
+  {id:30, name:"Asmaa Lamnawar", era:"jdida", diff:"sahl"},
 ];
+const DIFF_LABELS = {sahl:'🟢 Sahla', mtwaset:'🟠 Mtwasta', sa3b:'🔴 Sa3ba'};
 const MOHRIJ_QUESTIONS = [
   "Chkon akher chi wa7d 9elt lih 'nb9awdik' bla matdiroha?",
   "Ila kanti chakhsiya maghribiya, chkon ghatkoun w 3lach?",
@@ -340,8 +357,6 @@ let describeSelection = null;
 let guessSelection = null;
 let pendingJoinCode = null;
 let didAutoJoin = false;
-
-// mic / speech recognition
 let recognition = null;
 let isRecording = false;
 let descTextDebounce = null;
@@ -367,16 +382,13 @@ function genRoomCode(){
   let c=''; for(let i=0;i<4;i++) c+=letters[Math.floor(Math.random()*letters.length)];
   return c;
 }
-function roomShareUrl(){
-  return location.origin + location.pathname + '?room=' + currentRoomCode;
-}
+function roomShareUrl(){ return location.origin + location.pathname + '?room=' + currentRoomCode; }
+function setLeaveBtnVisible(v){ document.getElementById('leave-room-btn').style.display = v ? 'inline-block' : 'none'; }
 
 // ---------- AUTH ----------
 window.signIn = function(){
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider).catch(err=>{
-    showError('auth-error', 'Ma9darch ndkhol: ' + err.message);
-  });
+  signInWithPopup(auth, provider).catch(err=>{ showError('auth-error', 'Ma9darch ndkhol: ' + err.message); });
 };
 onAuthStateChanged(auth, async (user)=>{
   if(user){
@@ -390,20 +402,25 @@ onAuthStateChanged(auth, async (user)=>{
       document.getElementById('waiting-text').textContent = 'Katdkhol l ghorfa...';
       await joinRoom();
     } else {
+      setLeaveBtnVisible(false);
       showScreen('screen-home');
     }
   } else {
     currentUser = null;
+    setLeaveBtnVisible(false);
     showScreen('screen-auth');
   }
 });
 
-// ---------- DECK SIZING (equal hands for any player count 2-8) ----------
-function computeNumChars(numPlayers){
-  for(let n=30; n>=1; n--){
-    if((2*n) % numPlayers === 0) return n;
-  }
-  return numPlayers;
+// ---------- DECK SIZING (equal, reasonable hands for 2-8 players) ----------
+const HAND_SIZE_TABLE = {2:8,3:8,4:7,5:6,6:6,7:6,8:5};
+function computeDeckParams(numPlayers, pool){
+  const desiredHandSize = HAND_SIZE_TABLE[numPlayers] || 6;
+  const desiredNumChars = Math.max(1, Math.floor((numPlayers*desiredHandSize)/2));
+  let n = Math.min(desiredNumChars, pool.length);
+  while(n>1 && (2*n)%numPlayers!==0) n--;
+  if((2*n)%numPlayers!==0) n=1;
+  return n;
 }
 
 // ---------- ROOM CREATE / JOIN ----------
@@ -445,6 +462,7 @@ window.joinRoom = async function(){
 
 function enterRoom(code){
   currentRoomCode = code;
+  setLeaveBtnVisible(true);
   if(unsubRoom) unsubRoom();
   const roomRef = doc(db, 'rooms', code);
   unsubRoom = onSnapshot(roomRef, (snap)=>{
@@ -457,7 +475,42 @@ function enterRoom(code){
 window.backToHome = function(){
   if(unsubRoom) unsubRoom();
   currentRoomCode = null; currentRoom = null;
+  setLeaveBtnVisible(false);
   showScreen('screen-home');
+};
+
+window.confirmLeave = function(){
+  if(confirm('Wach mtaked bghiti tkhrouj mn had l-ghorfa?')){ leaveRoom(); }
+};
+
+window.leaveRoom = async function(){
+  if(!currentRoom || !currentRoomCode){ backToHome(); return; }
+  const roomRef = doc(db,'rooms',currentRoomCode);
+  if(currentRoom.status === 'lobby'){
+    const players = currentRoom.players.filter(p=>p.uid!==currentUser.uid);
+    if(players.length===0){
+      backToHome(); return;
+    }
+    let hostUid = currentRoom.hostUid;
+    if(hostUid===currentUser.uid){ hostUid = players[0].uid; }
+    await updateDoc(roomRef, {players, hostUid});
+  } else if(currentRoom.status === 'playing'){
+    const players = JSON.parse(JSON.stringify(currentRoom.players));
+    const me = players.find(p=>p.uid===currentUser.uid);
+    if(me){ me.out = true; me.hand = []; }
+    const active = players.filter(p=>!p.out);
+    let updates = {players};
+    if(active.length<=1){
+      updates.status = 'finished';
+      updates.winnerUid = active[0] ? active[0].uid : null;
+    } else if(currentRoom.describerUid===currentUser.uid || currentRoom.guesserUid===currentUser.uid){
+      updates.describerUid = nextActiveUidFromPlayers(players, currentRoom.describerUid);
+      updates.guesserUid=null; updates.describeCard=null; updates.guessCard=null;
+      updates.liveDescription=''; updates.phase='turn';
+    }
+    await updateDoc(roomRef, updates);
+  }
+  backToHome();
 };
 
 window.copyRoomCode = function(){ navigator.clipboard?.writeText(currentRoomCode); };
@@ -469,9 +522,7 @@ window.shareWhatsapp = function(){
 window.nativeShare = function(){
   if(navigator.share){
     navigator.share({ title:'Chkoun Howa', text:'Jini nl3bo m3aya Chkoun Howa!', url: roomShareUrl() }).catch(()=>{});
-  } else {
-    copyRoomLink();
-  }
+  } else { copyRoomLink(); }
 };
 
 // ---------- RENDER ----------
@@ -483,9 +534,8 @@ function renderRoom(){
     document.getElementById('room-code-display').textContent = currentRoomCode;
     document.getElementById('lobby-players').innerHTML = room.players.map(p=>`<div class="player-chip">${p.name}</div>`).join('');
     const isHost = room.hostUid === currentUser.uid;
-    const startBtn = document.getElementById('start-game-btn');
-    startBtn.style.display = isHost ? 'block' : 'none';
-    startBtn.disabled = room.players.length < 2;
+    document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
+    document.getElementById('start-game-btn').disabled = room.players.length < 2;
     document.getElementById('lobby-wait-msg').style.display = isHost ? 'none' : 'block';
     showScreen('screen-lobby');
     return;
@@ -573,9 +623,6 @@ function renderDescribingScreen(){
     liveBox.textContent = isMe ? 'Sta3mel l-mic wla kteb wasf...' : 'Katsna wasf...';
     liveBox.classList.add('empty');
   }
-  if(!isMe && document.getElementById('desc-textarea').value !== (currentRoom.liveDescription||'')){
-    // no-op: textarea only used by describer, others rely on live-desc-box
-  }
 
   const selfSelectBox = document.getElementById('guesser-self-select');
   const list = document.getElementById('self-guess-list');
@@ -592,7 +639,7 @@ function renderDescribingScreen(){
     }
   } else {
     waiter.style.display='none';
-    const eligible = !isMe && !myPlayer().out && myPlayer().hand.length>0;
+    const eligible = !isMe && myPlayer() && !myPlayer().out && myPlayer().hand.length>0;
     if(eligible){
       selfSelectBox.style.display='block';
       list.innerHTML = `<button class="btn btn-gold" onclick="window.claimGuesser()">🙋 Ana N7ammen!</button>`;
@@ -624,26 +671,16 @@ function setupRecognition(){
 window.toggleMic = function(){
   const btn = document.getElementById('mic-btn');
   if(!recognition) recognition = setupRecognition();
-  if(!recognition){
-    showError('home-error','Mic ma khdamch f had browser, sta3mel l-textarea bach tkteb wasf.');
-    return;
-  }
+  if(!recognition){ showError('home-error','Mic ma khdamch f had browser, sta3mel l-textarea.'); return; }
   if(!isRecording){
-    isRecording = true;
-    recognition.start();
-    btn.textContent = '⏹ Wa9ef';
-    btn.classList.add('recording');
+    isRecording = true; recognition.start();
+    btn.textContent = '⏹ Wa9ef'; btn.classList.add('recording');
   } else {
-    isRecording = false;
-    recognition.stop();
-    btn.textContent = '🎤 Bda Twasef';
-    btn.classList.remove('recording');
+    isRecording = false; recognition.stop();
+    btn.textContent = '🎤 Bda Twasef'; btn.classList.remove('recording');
   }
 };
-window.onDescTextInput = function(){
-  const val = document.getElementById('desc-textarea').value;
-  debouncedWriteLiveDescription(val);
-};
+window.onDescTextInput = function(){ debouncedWriteLiveDescription(document.getElementById('desc-textarea').value); };
 function debouncedWriteLiveDescription(text){
   clearTimeout(descTextDebounce);
   descTextDebounce = setTimeout(async ()=>{
@@ -664,7 +701,6 @@ window.noOneGuessed = async function(){
   });
 };
 
-// ---------- SELF-SELECT GUESSER (transaction to avoid double-claim) ----------
 window.claimGuesser = async function(){
   const roomRef = doc(db,'rooms',currentRoomCode);
   try{
@@ -674,9 +710,8 @@ window.claimGuesser = async function(){
       if(data.phase !== 'describing' || data.guesserUid){ return; }
       tx.update(roomRef, { guesserUid: currentUser.uid, updatedAt: Date.now() });
     });
-  }catch(e){ /* ignore race */ }
+  }catch(e){}
 };
-
 window.cancelMyGuess = async function(){
   await updateDoc(doc(db,'rooms',currentRoomCode), { guesserUid:null, updatedAt: Date.now() });
 };
@@ -701,7 +736,6 @@ window.confirmGuessCard = async function(){
   const card = me.hand.splice(guessSelection,1)[0];
   const describeCard = currentRoom.describeCard;
   const match = describeCard.characterId === card.characterId;
-
   if(match){
     const winnerP = players.find(p=>p.uid===currentUser.uid);
     winnerP.hand.push(describeCard, card);
@@ -709,11 +743,17 @@ window.confirmGuessCard = async function(){
     const describerP = players.find(p=>p.uid===currentRoom.describerUid);
     describerP.hand.push(describeCard, card);
   }
-
   await updateDoc(doc(db,'rooms',currentRoomCode), {
     players, guessCard: card, phase: 'reveal', liveDescription:'', updatedAt: Date.now()
   });
 };
+
+function cardBadges(card){
+  return `<div class="badges">
+    <span class="era-tag ${card.era==='jdida'?'jdida':''}">${card.era==='9dima'?'📜 9dima':'✨ Jdida'}</span>
+    <span class="diff-tag ${card.diff||''}">${DIFF_LABELS[card.diff]||''}</span>
+  </div>`;
+}
 
 function renderRevealScreen(){
   const describeCard = currentRoom.describeCard;
@@ -724,11 +764,8 @@ function renderRevealScreen(){
   banner.className = 'result-banner ' + (match?'match':'nomatch');
   document.getElementById('reveal-describer-label').textContent = playerByUid(currentRoom.describerUid).name + " (Description)";
   document.getElementById('reveal-guesser-label').textContent = playerByUid(currentRoom.guesserUid).name + " (Guess)";
-  document.getElementById('reveal-describe-card').innerHTML =
-    `<div class="era-tag ${describeCard.era==='jdida'?'jdida':''}">${describeCard.era==='9dima'?'📜 9dima':'✨ Jdida'}</div><div class="char-name">${describeCard.name}</div>`;
-  document.getElementById('reveal-guess-card').innerHTML =
-    `<div class="era-tag ${guessCard.era==='jdida'?'jdida':''}">${guessCard.era==='9dima'?'📜 9dima':'✨ Jdida'}</div><div class="char-name">${guessCard.name}</div>`;
-
+  document.getElementById('reveal-describe-card').innerHTML = cardBadges(describeCard) + `<div class="char-name">${describeCard.name}</div>`;
+  document.getElementById('reveal-guess-card').innerHTML = cardBadges(guessCard) + `<div class="char-name">${guessCard.name}</div>`;
   const isDescriber = currentRoom.describerUid === currentUser.uid;
   document.getElementById('reveal-continue-btn').style.display = isDescriber ? 'block' : 'none';
   document.getElementById('reveal-waiter').style.display = isDescriber ? 'none' : 'block';
@@ -739,12 +776,9 @@ window.afterReveal = async function(){
   document.getElementById('desc-textarea').value='';
   const players = JSON.parse(JSON.stringify(currentRoom.players));
   const elimUids = players.filter(p=>!p.out && p.hand.length===0).map(p=>p.uid);
-
   if(elimUids.length>0){
-    const firstUid = elimUids[0];
-    const rest = elimUids.slice(1);
-    const p = players.find(pl=>pl.uid===firstUid);
-    p.out = true;
+    const firstUid = elimUids[0]; const rest = elimUids.slice(1);
+    const p = players.find(pl=>pl.uid===firstUid); p.out = true;
     const q = MOHRIJ_QUESTIONS[Math.floor(Math.random()*MOHRIJ_QUESTIONS.length)];
     await updateDoc(doc(db,'rooms',currentRoomCode), {
       players, phase:'question', pendingElim: rest, guessCard:null, describeCard:null, guesserUid:null,
@@ -769,10 +803,8 @@ window.afterQuestion = async function(){
   const players = JSON.parse(JSON.stringify(currentRoom.players));
   const pending = currentRoom.pendingElim || [];
   if(pending.length>0){
-    const nextUid = pending[0];
-    const rest = pending.slice(1);
-    const p = players.find(pl=>pl.uid===nextUid);
-    p.out = true;
+    const nextUid = pending[0]; const rest = pending.slice(1);
+    const p = players.find(pl=>pl.uid===nextUid); p.out = true;
     const q = MOHRIJ_QUESTIONS[Math.floor(Math.random()*MOHRIJ_QUESTIONS.length)];
     await updateDoc(doc(db,'rooms',currentRoomCode), {
       players, pendingElim: rest, elimUid: nextUid, currentQuestion: q, updatedAt: Date.now()
@@ -786,9 +818,7 @@ async function proceedAfterAllElims(players){
   const active = players.filter(p=>!p.out);
   if(active.length<=1){
     const winner = active[0] || players.reduce((a,b)=> a.hand.length>=b.hand.length?a:b);
-    await updateDoc(doc(db,'rooms',currentRoomCode), {
-      players, status:'finished', winnerUid: winner.uid, updatedAt: Date.now()
-    });
+    await updateDoc(doc(db,'rooms',currentRoomCode), { players, status:'finished', winnerUid: winner.uid, updatedAt: Date.now() });
   } else {
     const nextDescriberUid = nextActiveUidFromPlayers(players, currentRoom.describerUid);
     await updateDoc(doc(db,'rooms',currentRoomCode), {
@@ -807,17 +837,19 @@ function nextActiveUidFromPlayers(players, fromUid){
   return fromUid;
 }
 
-// ---------- START GAME (host) — equal hand size for everyone ----------
+// ---------- START GAME (host) — equal, reasonable hand size for everyone ----------
 window.startOnlineGame = async function(){
   const room = currentRoom;
   const numPlayers = room.players.length;
-  const numChars = computeNumChars(numPlayers);
-  const chosenChars = shuffle([...CHARACTERS]).slice(0, numChars);
+  const difficulty = document.getElementById('difficulty-select').value;
+  const pool = difficulty==='kolchi' ? CHARACTERS : CHARACTERS.filter(c=>c.diff===difficulty);
+  const numChars = computeDeckParams(numPlayers, pool);
+  const chosenChars = shuffle([...pool]).slice(0, numChars);
 
   let deck = [];
   chosenChars.forEach(c=>{
-    deck.push({cardId:c.id+'_a', characterId:c.id, name:c.name, era:c.era});
-    deck.push({cardId:c.id+'_b', characterId:c.id, name:c.name, era:c.era});
+    deck.push({cardId:c.id+'_a', characterId:c.id, name:c.name, era:c.era, diff:c.diff});
+    deck.push({cardId:c.id+'_b', characterId:c.id, name:c.name, era:c.era, diff:c.diff});
   });
   shuffle(deck);
   const players = JSON.parse(JSON.stringify(room.players)).map(p=>({...p, hand:[], out:false}));
