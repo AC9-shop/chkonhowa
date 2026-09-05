@@ -130,6 +130,14 @@
   .self-guess-list .btn{margin-top:0;}
   .share-box{margin-top:18px; padding-top:16px; border-top:1px dashed rgba(201,162,39,0.3);}
   .diff-info{font-size:0.75rem; color:rgba(251,242,221,0.55); margin-top:4px; text-align:center;}
+  .topbar-row{display:flex; gap:8px; justify-content:center; margin-bottom:18px;}
+  .topbar-row .btn{width:auto; margin-top:0; padding:8px 16px; font-size:0.8rem; display:none;}
+  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:100; padding:20px;}
+  .modal-overlay.active{display:flex;}
+  .modal-content{background:var(--teal-mid); border:2px solid var(--gold); border-radius:16px; padding:24px; max-width:520px; width:100%; max-height:80vh; overflow-y:auto;}
+  .modal-content h3{font-family:'Rakkas',serif; color:var(--gold); text-align:center; margin:0 0 6px;}
+  .mini-card.readonly{cursor:default;}
+  .mini-card.readonly:hover{transform:none; box-shadow:none;}
   @media (max-width:480px){ .app{padding:22px 16px;} h1.title{font-size:1.9rem;} }
 </style>
 </head>
@@ -137,7 +145,19 @@
 <div class="app">
   <h1 class="title">شكون هو؟</h1>
   <div class="subtitle">Chkoun Howa Online — L3ab m3a S7abek 3n Bo3d</div>
-  <button class="btn btn-ghost" id="leave-room-btn" onclick="confirmLeave()">🚪 Kharej mn Ghorfa</button>
+  <div class="topbar-row">
+    <button class="btn btn-gold" id="view-hand-btn" onclick="openMyHandModal()">👁 Cartes Dyali</button>
+    <button class="btn btn-ghost" id="leave-room-btn" onclick="confirmLeave()">🚪 Kharej mn Ghorfa</button>
+  </div>
+
+  <div class="modal-overlay" id="my-hand-modal">
+    <div class="modal-content">
+      <h3>Cartes Dyali</h3>
+      <div class="center-msg small" id="my-hand-count"></div>
+      <div class="hand-grid" id="my-hand-view-grid"></div>
+      <button class="btn btn-primary" onclick="closeMyHandModal()">Sd ✕</button>
+    </div>
+  </div>
 
   <!-- AUTH -->
   <div class="screen active" id="screen-auth">
@@ -384,6 +404,17 @@ function genRoomCode(){
 }
 function roomShareUrl(){ return location.origin + location.pathname + '?room=' + currentRoomCode; }
 function setLeaveBtnVisible(v){ document.getElementById('leave-room-btn').style.display = v ? 'inline-block' : 'none'; }
+function setHandBtnVisible(v){ document.getElementById('view-hand-btn').style.display = v ? 'inline-block' : 'none'; }
+window.openMyHandModal = function(){
+  if(!currentRoom || currentRoom.status!=='playing') return;
+  const me = myPlayer();
+  if(!me) return;
+  document.getElementById('my-hand-count').textContent = me.hand.length + ' cartes';
+  const grid = document.getElementById('my-hand-view-grid');
+  grid.innerHTML = me.hand.map(c=>`<div class="mini-card readonly">${c.name}</div>`).join('') || '<div class="center-msg small">Ma3andekch cartes.</div>';
+  document.getElementById('my-hand-modal').classList.add('active');
+};
+window.closeMyHandModal = function(){ document.getElementById('my-hand-modal').classList.remove('active'); };
 
 // ---------- AUTH ----------
 window.signIn = function(){
@@ -403,11 +434,13 @@ onAuthStateChanged(auth, async (user)=>{
       await joinRoom();
     } else {
       setLeaveBtnVisible(false);
+      setHandBtnVisible(false);
       showScreen('screen-home');
     }
   } else {
     currentUser = null;
     setLeaveBtnVisible(false);
+    setHandBtnVisible(false);
     showScreen('screen-auth');
   }
 });
@@ -476,6 +509,7 @@ window.backToHome = function(){
   if(unsubRoom) unsubRoom();
   currentRoomCode = null; currentRoom = null;
   setLeaveBtnVisible(false);
+  setHandBtnVisible(false);
   showScreen('screen-home');
 };
 
@@ -537,6 +571,7 @@ function renderRoom(){
     document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
     document.getElementById('start-game-btn').disabled = room.players.length < 2;
     document.getElementById('lobby-wait-msg').style.display = isHost ? 'none' : 'block';
+    setHandBtnVisible(false);
     showScreen('screen-lobby');
     return;
   }
@@ -544,10 +579,12 @@ function renderRoom(){
   if(room.status === 'finished'){
     const winner = room.players.find(p=>p.uid===room.winnerUid);
     document.getElementById('winner-name').textContent = winner ? winner.name : '?';
+    setHandBtnVisible(false);
     showScreen('screen-winner');
     return;
   }
 
+  setHandBtnVisible(true);
   renderScoreboard();
   switch(room.phase){
     case 'turn': renderTurnScreen(); break;
